@@ -1,0 +1,10 @@
+div > * {
+    opacity: 1;
+    animation: ani .5s forwards;
+}
+*:hover{
+    transition: .2s infinite linear;
+}
+@keyframes ani {
+    0%   {opacity: .0;}
+}

@@ -1,0 +1,300 @@
+<!-- Форматирование -->
+<!DOCTYPE html>
+<html lang="ru" class="no-js">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <head>
+        <meta charset="utf-8">
+        <meta name="robots" content="noyaca" />
+        <meta name="yandex-verification" content="2d8c1dcb18ad48b7"/>
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+        <!-- Интеграция Embed -->
+        <title>KetaMeRadio Web</title>
+        <meta property="og:title" content="KetaMeRadio Web">
+        <meta property="og:site_name" content="KetaRu">
+        <meta property="og:url" content="https://live.ketame.ru">
+        <meta property="og:description" content="Наше онлайн версия радио бота">
+        <link rel="shortcut icon" href="./icon.png">
+        <meta property="og:image" content="https://live.ketame.ru/icon.png">
+        <meta property="og:image:width" content="512">
+        <meta property="og:image:height" content="512">
+        <meta name="theme-color" content="#e43f79">
+        <!-- <script src="https://raw.githack.com/lisikme/live.ketame.ru/web/list.js"></script> -->
+        <script src="https://cdn.statically.io/gh/lisikme/live.ketaru.com/web/list.js"></script>
+        <!-- beta -->
+        <link rel="stylesheet" href="css/Page.css">        <!-- Дизайн фона сайта --> 
+        <link rel="stylesheet" href="css/Head.css">        <!-- Дизайн шапки сайта --> 
+        <link rel="stylesheet" href="css/Root.css">        <!-- Конфигурация -->
+        <link rel="stylesheet" href="css/Root.css">        <!-- Конфигурация -->
+        <link rel="stylesheet" href="https://emoji-css.afeld.me/emoji.css">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Onest&display=swap');
+    :root {
+    --NamePage: "Radio";
+    --VerPage: "KetaRu Web";
+    }
+    @keyframes ani {
+    0%   {left: calc(50% - 280.5px)}
+    100% {left: calc(50% - 216px)}
+    }
+    @keyframes buff {
+        0%   {opacity: 0;}
+        30%   {opacity: 0;}
+        100% {opacity: 1;}
+    }
+    @keyframes bg {
+        0%   {opacity: .0; transform: scale(1);}
+        100% {opacity: 1;}
+    }
+    .em{
+        font-size: 16.6px;
+        position: relative;
+        bottom: 2.4px;
+    }
+    .em-logo{
+        background-image: url("https://ketame.ru/icon.png")
+    }
+    #errr{
+        animation: bg 1s ease;
+        position: absolute;
+        height: 40px;
+        bottom: 19px;
+        left: 20px;
+        border-radius: 10px;
+        /* -webkit-mask: url(https://static.nuum.ru/assets/fe-new/images/hashtag/hashtag-mask.svg) no-repeat; */
+        /* mask: url(https://static.nuum.ru/assets/fe-new/images/hashtag/hashtag-mask.svg) no-repeat; */
+        mask-size: contain;
+        -webkit-mask-size: contain;
+    }
+    #df{
+        animation: bg 1s ease;
+        font-family: onest;
+        position: absolute;
+        font-size: 15px;
+        left: 70px;
+        bottom: 15px;
+    }
+    #df1{
+        animation: bg 1s ease;
+        font-family: onest;
+        color: #999;
+        position: absolute;
+        font-size: 12px;
+        left: 88px;
+        bottom: 0px;
+    }
+    </style>
+<!-- JavasCript -->
+<img src="./prom.png" alt="" id="errr">
+<h1 id="df">KR.Corp - Music</h1>
+<h1 id="df1">Организатор</h1>
+<script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
+<script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+<script src="https://krcorpserver.github.io/db-ketaru/serv.js"></script>
+<body id="site-bg" >
+<!-- <link rel="stylesheet" href="./head.css"> -->
+    <header id="site-header">
+        <type id="page-name">
+            <span id="namm">KetaMeRadio<span id="rel">БЕТА</span></span>
+            <span id="nam">APP - Приложение</span></type>
+        <div id="site-header-box">
+            <a onclick="window.open('./../', '_blank')">
+                <div id="site-logo-box">
+                    <img id="site-logo-img" src="https://ketame.ru/corp.png">
+                    <name id="site-logo-name">
+                        <span id="ketaru">Ketaru</span>
+                        <span id="corp">Corp</span>
+                    </name>
+                </div>
+            </a>
+        </div>
+    </header>
+</body>
+    <html>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="yandex-verification" content="bef8770f64b65879" />
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="description" content="Слушать радиостанции онлайн">
+            <meta name="keywords" content="KetaRu, KetaruDev, KetaruDev, fist89, golive, radio, live, music, discord, bot, bots, ketame.ru">
+        </head>
+        
+        <!-- <button id="ff" onclick="Ret('q')">kk</button> -->
+        
+        <body onLoad="Redirect()">
+    <div style="display: none;" id="inf"><span id="guilds"></span><span id="space"> </span><span id="radiolist"></span></div>
+            
+    <script>
+        var global_list = fm_list.length/5
+        document.getElementById('guilds').innerText = bot_guilds
+        document.getElementById('radiolist').innerText = global_list
+        let url = new URL(window.location.href)
+        let par = new URLSearchParams(url.search);
+        const select = par.get("id");
+        console.log(select)
+        
+        function Redirect(){
+            const queryString = window.location.search;
+            document.getElementById('q').src=`https://lisikme.github.io/ketame-fm-webview/web/page4.html?id=${select}`;
+            if (`${select}` === `null`) {
+                const url = new URL(window.location);
+                url.searchParams.set('id', 1); // Устанавливаем новое значение параметра
+                window.history.pushState({}, '', url);
+            }
+            if (select > global_list || select < 1) {
+                if (select > global_list){var sell = global_list}
+                if (select < 1){var sell = 1}
+                document.getElementById('q').src=`https://lisikme.github.io/ketame-fm-webview/web/page4.html?id=${sell}`;
+                const url = new URL(window.location);
+                url.searchParams.set('id', sell); // Устанавливаем новое значение параметра
+                window.history.pushState({}, '', url);
+                const meta = document.getElementsByTagName('meta')  
+                // meta.keywords.content = "My new page keywords";  
+                // meta.description.content = "My new page description"
+            }
+        }
+    // function Red(){
+        //     const queryString = window.location.search;
+        //     // document.getElementById('q').src=`./page.html?id=${select}`;
+        //     if (`${select}` === `null`) {
+            //         const url = new URL(window.location);
+            //         url.searchParams.set('id', 1); // Устанавливаем новое значение параметра
+            //         window.history.pushState({}, '', url);
+            //     }
+            //     if (select > 50 || select < 1) {
+                //         if (select > 50){var sell = 50}
+                //         if (select < 1){var sell = 1}
+                //         // document.getElementById('q').src=`./page.html?id=${sell}`;
+                //         const url = new URL(window.location);
+                //         url.searchParams.set('id', sell); // Устанавливаем новое значение параметра
+                //         window.history.pushState({}, '', url);
+                //     }
+                // }
+                
+                
+        function Ret(frameID){
+            let frameObj = document.getElementById(frameID);
+            let frameContent = frameObj.contentWindow.document.getElementById('idfm').textContent;
+            console.log(frameContent);
+            
+        }
+    </script>
+    <iframe id="q" src="" width="100%" height="100%">
+    </iframe>
+    <style>
+        li.footer-link.mb-10{
+            height: 28px !important;
+        }
+        li {
+            list-style-type: none;
+        }
+        ul {
+            margin-left: 0;
+            padding-left: 0;
+        }
+        #tags{
+            color: #ffffff;
+            background: #ffffff25;
+            padding: 2px 10px;
+            font-size: 12px;
+            opacity: 1 !important;
+            border-radius: 3px;
+        }
+        #ddf{
+            width: 100%;
+            position: absolute;
+            right: 0px;
+            /* top: 48px; */
+            padding: 30px;
+            width: 100%;
+            top: -10px;
+
+            background-image: linear-gradient(-180deg, #191923 0%, #14141E 100%);
+            box-shadow: 0 -10px 20px 0 rgba(20, 20, 30, .2);
+        }
+        .footer-link a {
+            color: #ff7235 !important;
+            opacity: .7;
+            -webkit-transition: .3s;
+            transition: .3s all;
+        }
+        a, a:hover {
+            text-decoration: none;
+            color: #fff;
+        }
+        .footer-link a:hover{
+            opacity: 1;
+            transition: .3s all;
+            padding-left: 10px;
+            position: relative !important;
+        }
+        /* .footer-link {
+            margin-bottom: 5px;
+        } */
+        p, li, a, blockquote {
+            margin: 0;
+            font-family: onest, sans-serif;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+        hr {
+            background-color: rgba(235, 235, 240, .2) !important;
+            margin: 0 !important;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            border: 0;
+            border-top: 1px solid rgba(0, 0, 0, .1);
+        }
+        #err {
+            margin-bottom: 10px !important;
+        }
+        #boxe1, #boxe2{
+            margin: 0 auto;
+            max-width: 1315px;
+            font-size: 16px;
+            border-radius: 10px;
+            z-index: 1000 !important;
+            /* width: 450px; */
+            background: rgba(255, 255, 255, 0.03);
+            border: rgba(255, 255, 255, 0.05) solid 1px;
+            padding: 10px 10px 5px 10px;
+        }
+        #boxe1{
+            margin-bottom: 15px;
+        }
+        .logs_page{
+            padding-top: 0px !important;
+            padding-bottom: 0px !important;
+            position: relative;
+            /* position: absolute; */
+            left: 0px !important;
+        }
+        ::-webkit-scrollbar { /* chrome based */
+            width: 0px;  /* ширина scrollbar'a */
+            background: transparent;  /* опционально */
+        }
+        #q{
+            height: calc(100% - 58px);
+        }
+        html, body {
+            margin: 0px;
+            padding: 0px;
+            border: 0px;
+            background: #222;
+            padding: 0px;
+            height: 100%;
+            overflow: hidden;
+            overflow-x: hidden;
+        }
+        iframe {
+            border-radius: 0px;
+            border: none;
+        }
+        *{
+            font-family: onest !important;
+        }
+    </style>
+</body>
+<html>
+<head>
