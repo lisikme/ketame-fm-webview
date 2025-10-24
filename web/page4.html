@@ -1,0 +1,866 @@
+<!-- Форматирование -->
+<!DOCTYPE html>
+<html lang="ru" class="no-js">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <head>
+        <meta charset="utf-8">
+        <meta name="robots" content="noyaca" />
+        <meta name="yandex-verification" content="2d8c1dcb18ad48b7"/>
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+        <!-- Интеграция Embed -->
+        <title>KetaMeRadio Web</title>
+        <meta property="og:title" content="KetaMeRadio Web">
+        <meta property="og:site_name" content="KetaRu">
+        <meta property="og:url" content="https://live.ketame.ru">
+        <meta property="og:description" content="Наше онлайн версия радио бота">
+        <link rel="shortcut icon" href="https://i.imgur.com/yDm8NLA.png">
+        <meta property="og:image" content="https://i.imgur.com/yDm8NLA.png">
+        <meta property="og:image:width" content="900">
+        <meta property="og:image:height" content="900">
+        <meta name="theme-color" content="#e43f79">
+        <!-- beta -->
+        <!-- <link rel="stylesheet" href="./css/Page.css"> -->
+        <!-- <link rel="stylesheet" href="./css/Header.css"> -->
+        <!-- <link rel="stylesheet" href="./css/Root.css"> -->
+        <!-- <link rel="stylesheet" href="https://cdn.statically.io/gh/lisikme/live.ketame.ru/web/web/css/Page.css"> -->
+        <!-- <link rel="stylesheet" href="https://cdn.statically.io/gh/lisikme/live.ketame.ru/web/css/Header.css"> -->
+        <!-- <link rel="stylesheet" href="https://cdn.statically.io/gh/lisikme/live.ketame.ru/web/css/Root.css"> -->
+        <style>
+            :root {
+                --NamePage: "Radio";
+                --VerPage: "Keta";
+            }
+            .em{
+                font-size: 16.6px;
+                position: relative;
+                bottom: 2.4px;
+            }
+            .em-logo{
+                background-image: url("https://i.imgur.com/K98MRfw.png")
+            }
+            </style>
+<!-- JavasCript -->
+<style>
+</style>
+
+<script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
+<script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+<!-- Шапка страницы -->
+<div class="body-wrap">
+    <head>
+        <meta charset="UTF-8">
+        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.3.1/css/all.css'>
+        
+        <link rel="stylesheet" href="./style.css">
+
+        <!-- <link rel="stylesheet" href="https://raw.githack.com/lisikme/live.ketame.ru/web/style.css"> -->
+        <!-- <link rel="stylesheet" href="https://combinatronics.io/lisikme/live.ketame.ru/web/style.css"> -->
+        <!-- <link rel="stylesheet" href="https://cdn.statically.io/gh/lisikme/live.ketame.ru/web/style.css"> -->
+        <meta name="yandex-verification" content="bef8770f64b65879" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Слушать радиостанции онлайн">
+        <meta name="keywords" content="KetaRu, KetaruDev, KetaruDev, fist89, golive, radio, live, music, discord, bot, bots, ketame.ru">
+    </head>
+    <body>
+        <!-- partial:index.partial.html -->
+        <!-- Tracks used in this music/audio player application are free to use. I downloaded them from Soundcloud and NCS websites. I am not the owner of these tracks. -->
+        <div id="app-cover">
+            <style>
+                html, body{
+                    background: #18181a;
+                }
+                #bg-artwork{
+                    display: none;
+                }
+            </style>
+            <div id="bg-artwork"></div>
+            <!-- <div id="bg-artwork"></div> -->
+            <!-- <div id="bg-layer"></div> -->
+            <div id="player">
+                <div class="container">
+                    <!-- <div class="dropdown" id="dropdown"></div> -->
+                </div>
+                <!-- <div id="err">
+                    <strong>Ошибка:</strong> Радиостанция недоступна.
+                </div> -->
+                <div id="player-track">
+                    <div id="s-area">
+                    </div>
+                    
+                </div>
+                <div id="player-content">
+                    <style>
+                        @import url('https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap');
+                        @keyframes fadeOut {
+                            0% {opacity: 1;}
+                            100% {opacity: 0;}
+                        }
+                        @keyframes fadeIn {
+                            0% {opacity: 0;}
+                            100% {opacity: 1;}
+                        }
+                        /* #err {
+                            opacity: 0;
+                            background: #ff333370;
+                            border: 1px solid #ff333370;
+                            color: #ffced2; 
+                            font-size: 18px;
+                            padding: 5px 20px; 
+                            border-radius: 3px;
+                            position: absolute;
+                            top: 178px;
+                            left: 0;
+                            width: 430px;
+                        } */
+                        .errbuffa {
+                            animation: fadeOut 0.3s forwards;
+                        }
+                        .errbuff {
+                            animation: fadeIn 0.3s forwards;
+                        }
+                        #errors{
+                            color: rgb(255, 107, 169);
+                            font-size: 10px;
+                            position: relative;
+                            top: -20px;
+                        }
+                        #info{
+                            color: rgb(107, 255, 174);
+                            font-size: 10px;
+                            position: relative;
+                            top: -20px;
+                        }
+                    </style>
+                    <script>
+                        function NewTab(url){
+                            var options={
+                                height: 820, // устанавливает высоту окна в пикселях.
+                                width: 680, // устанавливает ширину окна в пикселях.
+                                toolbar: 0, // определяет, отображается ли панель инструментов (включая кнопки вперед и назад) {1 (ДА) или 0 (НЕТ)}.
+                                scrollbars: 0, // определяет, появятся ли полосы прокрутки в окне {1 (ДА) или 0 (НЕТ)}.
+                                status: 0, // отображается ли строка состояния внизу окна {1 (ДА) или 0 (НЕТ)}.
+                                resizable: 0, // можно ли изменить размер окна {1 (ДА) или 0 (НЕТ)}. Также может быть перегружен с помощью resizable.
+                                left: (screen.width-680)/2, // левое положение при появлении окна.
+                                top: (screen.height-890)/2, // верхнее положение при появлении окна.
+                                center: 1, // мы должны центрировать окно? {1 (ДА) или 0 (НЕТ)}. переопределяет верхний и левый
+                                createnew: 0, // должны ли мы создавать новое окно для каждого события {1 (ДА) или 0 (НЕТ)}.
+                                location: 0, // определяет, отображается ли адресная строка {1 (ДА) или 0 (НЕТ)}.
+                                menubar: 0 // определяет, отображается ли строка меню {1 (ДА) или 0 (НЕТ)}.
+                            };
+                            var parameters="location="+options.location+",menubar="+options.menubar+",height="+options.height+",width="+options.width+",toolbar="+options.toolbar+",scrollbars="+options.scrollbars+",status="+options.status+",resizable="+options.resizable+",left="+options.left+",screenX="+options.left+",top="+options.top+",screenY="+options.top;
+                            var target = arguments[0] 
+                            window.open(target, 'popup', parameters)
+                        }
+                    </script>
+
+                    <style>
+                        @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+                        @import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+                        @import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC&display=swap');
+                        @import url('https://fonts.googleapis.com/css2?family=Jura&display=swap');
+                        @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+                        @import url('https://fonts.googleapis.com/css2?family=Manrope&display=swap');
+                        @import url('https://fonts.googleapis.com/css2?family=Overpass&display=swap');
+                        @import url('https://fonts.googleapis.com/css2?family=Commissioner&display=swap');
+                        @import url('https://fonts.googleapis.com/css2?family=Onest&display=swap');
+                        @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+                        :root{
+                            --gaps: 5px;
+                        }
+
+                        #err {
+                            opacity: 0;
+                            /* background: #ff333370;
+                            backdrop-filter: blur(2vh);
+                            border: 1px solid #ff333370;
+                            color: #ffced2; 
+                            font-size: 12px;
+                            padding: 2px 0px 1px 0px; 
+                            line-height: normal;
+                            border-radius: 3px;
+                            text-align: center;
+                            position: absolute;
+                            bottom: 0px;
+                            border-bottom: 0;
+                            border-bottom-left-radius: 0;
+                            border-bottom-right-radius: 0;
+                            margin: 0 auto;
+                            left: 0;
+                            right: 0px;
+                            width: 110px; */
+
+
+                            backdrop-filter: blur(20px);  
+                            font-weight: 500;
+                            color: #ffced2; 
+                            position: absolute;
+                            width: 90px;
+                            text-align: center;
+                            border: 1px solid #ff333350;
+                            /* border: 1px solid #8abdff30; */
+                            background: #ff333350;
+                            bottom: 0px !important;
+                            right: 40px !important;
+                            border-radius: 3px;
+                            border-bottom-right-radius: 0;
+                            border-bottom-left-radius: 0;
+                            /* border-top-right-radius: 0; */
+                            border-bottom: 0;
+                            line-height: 1;
+                            font-size: 10px;
+                            font-weight: 100;
+                            padding: 2px 0px;
+                            z-index: 1000;
+                        }
+                        #idfm {
+                            backdrop-filter: blur(20px);  
+                            font-weight: 500;
+                            color: #c9e74e !important;
+                            position: absolute;
+                            width: 30px;
+                            text-align: center;
+                            border: 1px solid #323337;
+                            background: #27272a;
+                            bottom: 0px !important;
+                            right: 5px !important;
+                            border-radius: 3px;
+                            border-bottom-right-radius: 0;
+                            border-bottom-left-radius: 0;
+                            border-bottom: 0;
+                            line-height: 1;
+                            font-size: 10px;
+                            font-weight: 500;
+                            padding: 2px 0px;
+                            z-index: 1000;
+                        }
+                        .grid-container {
+                            margin: 0px auto;
+                            top: 40px;
+                            background: #ffffff30;
+                            border: 1px solid #ffffff30;
+                            backdrop-filter: blur(2vh);
+                            border-radius: 5px;
+                            left: 2px;
+                            position: relative;
+                            display: grid;
+                            /* Колонки: 60% от текущей ширины (но не более 428px) и 40% */
+                            grid-template-columns: 60% auto;
+                            grid-template-rows: 30px 90px 40px 28px auto;
+                            grid-template-areas:
+                                't-info t-info'
+                                "t-display t-display"
+                                "t-player t-invite"
+                                "t-volume t-apps"
+                                "t-menu t-menu";
+                            gap: var(--gaps);
+                            row-gap: var(--gaps);
+                            /* Основные ограничения */
+                            width: 100%;
+                            max-width: 430px; /* Максимальная ширина контейнера */
+                            min-width: 300px; /* Минимальная ширина контейнера */
+                            padding: 8px 8px;
+                            box-sizing: border-box;
+                            
+                            /* Гарантия, что колонки не сломают ограничения */
+                            overflow: hidden; /* Защита от выпадающего контента */
+                        }
+                        .grid-item{
+                            display: flex;
+                            gap: var(--gaps);
+                            row-gap: var(--gaps);
+                        }
+                        .g-info{
+                            display: flex;
+                            gap: var(--gaps);
+                            row-gap: var(--gaps);
+                            justify-content: center;
+                            align-items: center;
+                            grid-area: t-info;
+                        }
+                        .g-display{
+                            height: 100%;
+                            width: 100%;
+
+                            display: block;
+                            gap: var(--gaps);
+                            row-gap: var(--gaps);
+                            justify-content: center;
+                            align-items: center;
+                            grid-area: t-display;
+                        }
+                        .g-player{
+                            display: flex;
+                            gap: var(--gaps);
+                            row-gap: var(--gaps);
+                            justify-content: center;
+                            align-items: center;
+                            grid-area: t-player;
+                        }
+                        .g-invite{
+                            display: flex;
+                            gap: var(--gaps);
+                            row-gap: var(--gaps);
+                            justify-content: center;
+                            align-items: center;
+                            grid-area: t-invite;
+                        }
+                        #add-bot{
+                            pointer-events: none !important;
+                            background: #33000085 !important;
+                            color: #ff6666 !important;
+                            bottom: 0px;
+                        }
+                        #add-bot::after{
+                            content: 'ПАНЕЛЬ УПРАВЛЕНИЯ';
+                            position: relative;
+                            color: #ff9999 !important;
+                            display: block;
+                            bottom: 1px;
+                            font-size: 10px;
+                            left: 0;
+                        }
+                        .g-volume{
+                            display: flex;
+                            gap: var(--gaps);
+                            row-gap: var(--gaps);
+                            justify-content: center;
+                            align-items: center;
+                            grid-area: t-volume;
+                        }
+                        .g-apps{
+                            display: flex;
+                            gap: var(--gaps);
+                            row-gap: var(--gaps);
+                            justify-content: center;
+                            align-items: center;
+                            grid-area: t-apps;
+                        }
+                        .g-apps{
+                            display: flex;
+                            gap: var(--gaps);
+                            row-gap: var(--gaps);
+                            justify-content: center;
+                            align-items: center;
+                            grid-area: t-apps;
+                        }
+                        .g-menu{
+                            display: grid;
+                            /* display: none; */
+                            gap: var(--gaps);
+                            row-gap: var(--gaps);
+                            justify-content: center;
+                            align-items: center;
+                            grid-area: t-menu;
+                            grid-template-rows: 28px;
+                            /* grid-template-columns: auto 1fr; */
+                            grid-template-columns: 1fr;
+                        }
+                    
+                        
+
+                        .button, .buttonlink {
+                            font-family: Onest, sans-serif;
+                            /* font-family: Rubik, sans-serif; */
+                            font-weight: 600;
+                            /* color: #ffffff !important; */
+                            color: #8abdff !important;
+                            transition: 0.3s ease all;
+                            background-color: #00000085;
+                            color: #fff;
+                            border: none;
+                            cursor: pointer;
+                            width: 100%;
+                            height: 100%;
+                            font-size: 12px;
+                            border-radius: 3px;
+                        }
+                        .button:hover, .buttonlink:hover {
+                            background: #22222285 !important;
+                            color: #ffffff !important;
+                            box-shadow: none !important;
+                            border: none !important;
+                        }
+                        #add-bot{
+                            font-size: 14px;
+                        }
+                        .btn{
+                            font-family: Onest, sans-serif;
+                            font-weight: 600;
+                            transition: 0.2s linear all !important;
+                            /* margin: 9px !important; */
+                            /* top: 66px; */
+                            /* bottom: auto; */
+                            bottom: -183px !important;
+                            position: absolute !important;
+                            /* border-radius: 3px; */
+                            width: calc(100% - 20px);
+                            height: 28px;
+                            margin-left: 10px;
+                            background: #ffffff30 !important;
+                            color: #ffffff !important;
+                        }
+                        .btn:hover{
+                            background: #22222285 !important;
+                        }
+                        .btn2{
+                            border: 0;
+                            font-family: Onest, sans-serif;
+                            font-weight: 600;
+                            border-radius: 3px;
+                            width: 100%;
+                            height: 100%;
+                            transition: 0.2s linear all !important;
+                            background: #ffffff30 !important;
+                            color: #ffffff !important;
+                        }
+                        .btn2:hover{
+                            background: #22222285 !important;
+                        }
+                        /* #player-content {
+                            height: 264px;
+                        } */
+                        #info-app{
+                            /* font-family: Rubik !important; */
+                            font-family: onest !important;
+                            background: #00000085 !important;
+                            margin: 9px 9px 0 9px;
+                            border-radius: 3px;
+                            font-size: 14px;
+                            color: #fff;
+                            text-align: center;
+                            align-content: center;
+                            line-height: normal;
+                            font-weight: 500;
+                            height: 100%;
+                            width: 100%;
+                            margin: 0;
+                        }
+                        #guilds:before{
+                            content: 'Серверов: ';
+                            color: #7bf0ff;
+                        }
+                        #radiolist:before{
+                            content: 'Радиостанций: ';
+                            color: #a0ff7b;
+                        }
+                        #space{
+                            position: relative;
+                            display: inline-block;
+                            margin: 0 10px;
+                            height: 18px;
+                            /* top: -1px; */
+                            width: 4px;
+                            color: #00000000;
+                            background: #ffe881;
+                            border-radius: 5px;
+                            margin-top: 0;
+                            margin-bottom: 0;
+                        }
+                        #guilds, #radiolist{
+                            position: relative;
+                        }
+                        .bt {
+                            font-size: 14px !important;
+                        }
+                        @media (max-width: 362px) {
+                            #guilds, #radiolist{
+                                top: 1.8px;
+                            }
+                            .grid-container {
+                                grid-template-rows: 28px 70px 40px 28px auto;
+                            }
+                            #album-name{
+                                font-size: 20px;
+                                top: 5px;
+                                left: 70px;
+                            }
+                            #track-name{
+                                top: 36px !important;
+                                font-size: 8px;
+                                left: 70px;
+                            }
+                            #idfm{
+                                bottom: 7px;
+                                right: 7px;
+                            }
+                            #album-art{
+                                opacity: 1;
+                                background: #0c1116;
+                                position: absolute;
+                                top: 7px;
+                                left: -30px;
+                                width: 56px;
+                                height: 56px;
+                                margin-left: 38px;
+                                border-radius: 3px;
+                                border: 0;
+                                transform: rotateZ(0);
+                                transition: 0.2s linear all;
+                                animation: art .5s forwards;
+                            }
+                            #info-app{
+                                font-size: 12px !important;
+                            }
+                            .button, .buttonlink {
+                                font-size: 10px !important;
+                            }
+                            .btn2{
+                                /* font-size: 12px !important; */
+                                border: 0;
+                                font-family: Onest, sans-serif;
+                                font-weight: 600;
+                                border-radius: 3px;
+                                width: 100%;
+                                height: 100%;
+                                transition: 0.2s linear all !important;
+                                background: #ffffff30 !important;
+                                color: #ffffff !important;
+                            }
+                            .bt {
+                                font-size: 12px !important;
+                            }  
+                        }                        
+                        #nonebutton{
+                            background: #00000030;
+                            pointer-events: none;
+                        }
+
+                    </style>
+<div class="grid-container">
+    <div class="g-info">
+        <div id="info-app">
+            <span id="guilds">...</span>
+            <span id="space">.</span>
+            <span id="radiolist">...</span>
+        </div>
+        <script src="https://krcorpserver.github.io/db-ketaru/serv.js"></script>
+        <script src="https://cdn.statically.io/gh/lisikme/live.ketaru.com/web/list.js"></script>
+        <script>
+            var global_list = fm_list.length/5
+            document.getElementById('guilds').innerText = bot_guilds
+            document.getElementById('radiolist').innerText = global_list
+        </script>
+    </div>
+    <style>
+        #player-info-box {
+            position: absolute;
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            display: flex;
+            gap: 5px;
+            padding: 8px;
+        }
+        #player-info-live {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 3px;
+        }
+        #album-art{
+            position: unset;
+            opacity: 1;
+            background: #0c1116;
+            position: unset;
+            width: unset;
+            aspect-ratio: 1;
+            height: 100%;
+            margin-left: 0px;
+            border-radius: 3px;
+            border: 0;
+            transform: rotateZ(0);
+            transition: 0.2s linear all;
+        }
+        #album-art-bg {
+            animation: buff 1s forwards;
+            filter: blur(50px) saturate(5) contrast(100%);
+            position: absolute;
+            top: 10px;
+            left: -30px;
+            width: 70px;
+            height: 70px;
+            margin-left: 40px;
+            transform: rotateZ(0);
+            transition: 0.3s linear all;
+            background: #0c1116;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        #album-name {
+            font-weight: 600;
+            font-size: 22px;
+            border-radius: 3px;
+            color: #53fbc9;
+            background: #00000099;
+            backdrop-filter: blur(20px);
+            padding: 2px 8px 1px 8px;
+            transition: 0.3s ease top;
+            animation: topToBottom 25s infinite 20s;
+        }
+        #track-name {
+            padding-bottom: 5px;
+            background: #22222299;
+            background: #00000099;
+            font-weight: 600;
+            color: #ff9de1;
+            font-size: 10px;
+            line-height: normal;
+            border-radius: 3px;
+            backdrop-filter: blur(20px);
+            padding: 2px 8px !important;
+        }
+    </style>
+    <div class="g-display">
+        <div id="box-play">
+            <div id="player-info-box">
+                <div id="album-art-bg" style="background-image: url(&quot;./img/fm_rts.png&quot;); background-size: cover;"></div>
+                <div id="album-art" style="background-image: url(&quot;./img/fm_rts.png&quot;); background-size: cover;" class="active"></div>
+                <div id="player-info-live">
+                    <div id="album-name" class="buffa">Загрузка</div>
+                    <div id="track-name">Loading...</div>
+                </div>
+            </div>
+            <span id="idfm" class="number active">---</span>
+            <div id="err">
+                Недоступно
+            </div>
+            <!-- <img class="active" onerror="this.style.visibility='hidden'" src="img/flyfox.png" height="10px" style="display:  none;"> -->
+        </div>
+    </div>
+    <div class="g-player">
+        <div class="button" id="play-previous" sound="true">
+            <i class="fas fa-backward"></i></div>
+        <div class="button" id="play-pause-button" sound="true">
+            <i class="fas fa-play"></i></div>
+        <div class="button" id="play-next" sound="true">
+            <i class="fas fa-forward"></i></div>
+    </div>
+    <div class="g-invite">
+        <button class="buttonlink" id="add-bot" onclick="NewTab('https://discord.com/oauth2/authorize?client_id=1392384290066796707')">KetaMeRadio</button>
+    </div>
+    <div class="g-volume">
+        <div class="range-input">
+            <input type="range" id="range" min="0" max="100" value="0" step="1">
+            <div class="value"><div>
+        </div></div></div>
+    </div>
+    <div class="g-apps">
+        <button id="nonebutton" class="buttonlink"></button>
+        <!-- <button onclick="window.open('./app/radio.apk', '_blank')" class="buttonlink">Android</button> -->
+        <!-- <button onclick="window.open('./app/radio.exe', '_blank')" class="buttonlink">Windows</button> -->
+    </div>
+    <div class="g-menu">
+        <button class="btn2 bt" id="btn">Выбрать радиостанцию из списка</button>
+        <div class="selectmenu" id="selectmenu">
+            <div class="real-box">
+                <div id="album-art2" style="background-image: url(&quot;./img/fm_rts.png&quot;); background-size: cover;" class="active"></div>
+                <div id="album-name2">888</div>
+            </div>
+            <div class="dropdown" id="dropdown"></div>
+            <!-- <div class="selectmenu-gui"></div> -->
+        </div>
+        <style>
+            #album-name2{
+                color: #ffffff;
+                background: #0000003b;
+                font-size: 12px;
+                border: #3a3a3b 1px solid;
+                font-weight: 500;
+                margin-top: 5px;
+                border-radius: 3px;
+                height: 55px;
+                display: flex;
+                text-align: center;
+                align-items: center;
+                justify-content: center;
+            }
+            .g-info{
+                display: flex;
+                gap: var(--gaps);
+                row-gap: var(--gaps);
+                justify-content: center;
+                align-items: center;
+                grid-area: t-info;
+            }
+            #err, #idfm{
+                z-index: unset;
+            }
+            #album-art2 {
+                & {
+                    opacity: 1;
+                    background: #0c1116;
+                    /* position: absolute; */
+                    top: 10px;
+                    left: -0px;
+                    width: 100%;
+                    aspect-ratio: 1/1;
+                    border-radius: 3px;
+                    border: 0;
+                    transform: rotateZ(0);
+                    transition: 0.2s linear all;
+                    animation: art .5s forwards;
+                }
+                & img {
+                    opacity: 0;
+                }
+                & img.active {
+                    opacity: .3;
+                    filter: blur(4px);
+                    -webkit-filter: blur(4px);
+                }
+            }
+            .real-box{
+                background: #ffffff44;
+                background: #00000070 !important;
+                /* height: 100%; */
+                /* width: 92px; */
+                padding: 5px;
+                grid-area: real-box;
+                border-radius: 3px;
+                
+            }
+            .dropdown, #dropdown{
+                width: 100%;
+                position: unset;
+                all: unset !important;
+                grid-area: selectmenu-gui;
+                overflow: auto !important;
+                border-radius: 3px !important;
+                /* background: #ffffff44 !important; */
+                background: #00000070 !important;
+            }
+            .dropdown a{
+                background: #18181a !important;
+                padding: 3px;
+                margin: 5px 5px;
+            }
+            a {
+                background: #fff000 !important;
+            }
+            .selectmenu-gui{
+                border-radius: 3px;
+                background: #ffffff44;
+                /* height: 100%; */
+                /* width: 92px; */
+                /* grid-area: selectmenu-gui; */
+
+            }
+            .selectmenu{
+                display: none;
+                position: absolute;
+                top: 43px;
+                left: 8px;
+                right: 8px;
+                background: #00000030;
+                border: 1px solid #323337;
+                backdrop-filter: blur(2vh);
+                border-radius: 3px;
+                /* display: grid; */
+                display: none;
+                grid-template-columns: 90px auto;
+                grid-template-rows: 100%;
+                grid-template-areas:
+                    'real-box selectmenu-gui';
+                gap: 5px;
+                row-gap: 8px;
+                padding: 8px 8px;
+                box-sizing: border-box;
+                overflow: hidden;
+                height: 168px;
+            }
+            .grid-container{
+                border: #323337 1px solid;
+                background: #131416 !important;
+            }
+
+            /* #dropdown{
+                position: absolute;
+                top: 8px;
+                height: 203px;
+                padding-left: 95px;
+                overflow: auto;
+                border: 1px solid #323337;
+            } */
+            #btn{
+                background: #27272a !important;
+                border: 1px solid #323337;
+            }
+            #btn:hover{
+                background: #1b1c1d !important;
+            }
+            .button, #info-app{                
+                background: #27272a !important;
+                border: 1px solid #323337 !important;
+            }
+            .button:hover{                
+                background: #1b1c1d !important;
+                border: 1px solid #323337 !important;
+            }
+            #box-play{
+                border: 1px solid #323337 !important;
+            }
+            .range-input {
+                & {
+                    width: 100%;
+                    height: 100%;
+                    padding: 0px 8px;
+                    padding-right: 5px;
+                    display: flex;
+                    align-items: center;
+                    transition: 0.3s ease all;
+                    background: #27272a !important;
+                    border: 1px solid #323337 !important;
+                    color: #8abdff;
+                    border-radius: 3px;
+                    padding: 0px 7px;
+                }
+            }
+            #add-bot {
+                pointer-events: none !important;
+                background: #33000085 !important;
+                color: #ff6666 !important;
+                border: 1px solid #3b0000 !important;
+                bottom: 0px;
+            }
+            #nums{
+                font-size: 15px !important;
+            }
+        </style>
+    </div>
+</div>
+<!-- <div id="use">Новая версия приложения</div>
+<style>
+    #use{
+        color: #ffffff;
+        background: #09090b;
+        width: 100%;
+        max-width: 430px;
+        min-width: 300px;
+        left: 2px;
+        top: 50px;
+        border-radius: 5px;
+        border: #323337 1px solid;
+        position: relative;
+        margin: 0 auto;
+        display: block;
+    }
+</style> -->
+<br><br><br><br>
+
+</body>
+</html>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+<script src="./config.js"></script>
+<script src="./ver4.js"></script> 
+
+
+<!-- <script src="https://cdn.statically.io/gh/lisikme/live.ketame.ru/web/list.js"></script> -->
+<!-- <script src="https://cdn.statically.io/gh/lisikme/live.ketame.ru/web/config.js"></script> -->
+<!-- <script src="https://cdn.statically.io/gh/lisikme/live.ketame.ru/web/ver3.js"></script>   -->
+<!-- <script src="list.js"></script> -->
+<!-- <script src="https://raw.githack.com/lisikme/live.ketame.ru/web/error.js"></script>   -->
+<!-- <script src="ver3.js"></script>   -->

@@ -1,0 +1,186 @@
+<!-- Форматирование -->
+<!DOCTYPE html>
+<html lang="ru" class="no-js">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <head>
+        <meta charset="utf-8">
+        <meta name="robots" content="noyaca" />
+        <meta name="yandex-verification" content="2d8c1dcb18ad48b7"/>
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+        <!-- Интеграция Embed -->
+        <title>KetaMeRadio Web</title>
+        <meta property="og:title" content="KetaMeRadio Web">
+        <meta property="og:site_name" content="KetaRu">
+        <meta property="og:url" content="https://live.ketame.ru">
+        <meta property="og:description" content="Наше онлайн версия радио бота">
+        <link rel="shortcut icon" href="https://i.imgur.com/yDm8NLA.png">
+        <meta property="og:image" content="https://i.imgur.com/yDm8NLA.png">
+        <meta property="og:image:width" content="900">
+        <meta property="og:image:height" content="900">
+        <meta name="theme-color" content="#e43f79">       <!-- Конфигурация -->
+        <link rel="stylesheet" href="https://emoji-css.afeld.me/emoji.css">
+        <style>
+            :root {
+                --NamePage: "Radio";
+                --VerPage: "Keta";
+            }
+            .em{
+                font-size: 16.6px;
+                position: relative;
+                bottom: 2.4px;
+            }
+            .em-logo{
+                background-image: url("https://i.imgur.com/K98MRfw.png")
+            }
+</style>
+<!-- JavasCript -->
+<script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
+<script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+<!-- Шапка страницы -->
+<div class="body-wrap">
+    <!-- <header class="site-header">
+        <div class="container">
+            <div class="site-header-inner">
+                <div class="brand header-brand">
+                    <ul class="footer-links list-reset">
+                        <h4 class="hero-title mt-0">
+                            <a href="https://ketame.ru">
+                                <span class="LogoBox"><i class="em em-logo"></i><ui class="LogoName"></span></a><ui class="LogoPage"><ui class="LogoVersion"></ui></h4>
+                            </head>
+                        </header> -->
+                        <!DOCTYPE html>
+                        <html>
+                            <head>
+                                <meta charset="UTF-8">
+                                <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.3.1/css/all.css'>
+                                <link rel="stylesheet" href="./styleold.css">
+                                <meta name="yandex-verification" content="bef8770f64b65879" />
+                                <meta charset="utf-8">
+                                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                <meta name="description" content="Слушать радиостанции онлайн">
+                                <meta name="keywords" content="KetaRu, KetaruDev, KetaruDev, fist89, golive, radio, live, music, discord, bot, bots, ketame.ru">
+                            </head>
+                            <body>
+                                <!-- partial:index.partial.html -->
+                                <!-- Tracks used in this music/audio player application are free to use. I downloaded them from Soundcloud and NCS websites. I am not the owner of these tracks. -->
+                                <div id="app-cover">
+                                    <div id="bg-artwork"></div>
+                                    <!-- <div id="bg-layer"></div> -->
+                                    <div id="player">
+                                        <div class="container">
+                                            <button class="btn" id="btn">
+                                                Выбрать радиостанцию из списка
+                                                <i class="bx bx-chevron-down" id="arrow"></i>
+                                            </button>
+                                            
+                                            <div class="dropdown" id="dropdown">
+                                            </div>
+                                            </div>
+                                        <div id="player-track">
+                                            <div id="s-area">
+                                            </div>
+                                        </div>
+                                        <div id="player-content">
+                                            <div id="boz" style="pointer-events: none;"></div>
+                                            <div class="addbuttonn">
+                                            <style>
+                                                #errors{
+                                                    color: rgb(255, 107, 169);
+                                                    font-size: 10px;
+                                                    position: relative;
+                                                    top: -20px;
+                                                }
+                                            </style>
+                                            <a target ='additional' onclick="NewTab('https://discord.com/oauth2/authorize?client_id=921838038580084777&scope=bot&scope=applications.commands%20bot&permissions=8')">
+                                            <!-- <a target ='additional'> -->
+                                                <div id="item1">Добавить в Discord
+                                                    <!-- <br><span id="errors">Временно недоступно!</span> -->
+                                                </div></a>
+                                            <!-- <a target ='additional' onclick="NewTab('https://discord.com/oauth2/authorize?client_id=921838038580084777&scope=bot&scope=applications.commands%20bot&permissions=8')">
+                                                <div id="item1">Добавить в Discord</div></a> -->
+
+                                            <!-- <a href="https://ketame.ru/join" id="item2" target="_blank">Сервер</a> -->
+                                            <!-- <div class="range-input">
+                                                <input type="range" id="range" min="0" max="100" value="0" step="1">
+                                                <div class="value"><div> -->
+                                                </div>
+                                                <div id="box-play">
+                                                    <div id="album-art-bg" style="background-image: url(load.gif); background-size: cover;"></div>
+                                                    <div id="album-art" style="background-image: url(load.gif); background-size: cover;"></div>
+                                                    <div id="album-name" class="buffa">Поиск...</div>
+                                                    <span id="idfm" class="number">1</span>
+                                                    <div id="track-name">Загрузка...</div>
+                                            <!-- <img class="active" onerror="this.style.visibility='hidden'" src="img/flyfox.png" height="10px" style="display:  none;"> -->
+                                                
+                                            </div>
+                                            <div class="addbutton">
+                                            </div>
+            <script>
+                function NewTab(url){
+                    var options={
+                        height: 820, // устанавливает высоту окна в пикселях.
+                        width: 680, // устанавливает ширину окна в пикселях.
+                        toolbar: 0, // определяет, отображается ли панель инструментов (включая кнопки вперед и назад) {1 (ДА) или 0 (НЕТ)}.
+                        scrollbars: 0, // определяет, появятся ли полосы прокрутки в окне {1 (ДА) или 0 (НЕТ)}.
+                        status: 0, // отображается ли строка состояния внизу окна {1 (ДА) или 0 (НЕТ)}.
+                        resizable: 0, // можно ли изменить размер окна {1 (ДА) или 0 (НЕТ)}. Также может быть перегружен с помощью resizable.
+                        left: (screen.width-680)/2, // левое положение при появлении окна.
+                        top: (screen.height-890)/2, // верхнее положение при появлении окна.
+                        center: 1, // мы должны центрировать окно? {1 (ДА) или 0 (НЕТ)}. переопределяет верхний и левый
+                        createnew: 0, // должны ли мы создавать новое окно для каждого события {1 (ДА) или 0 (НЕТ)}.
+                        location: 0, // определяет, отображается ли адресная строка {1 (ДА) или 0 (НЕТ)}.
+                        menubar: 0 // определяет, отображается ли строка меню {1 (ДА) или 0 (НЕТ)}.
+                    };
+                var parameters="location="+options.location+",menubar="+options.menubar+",height="+options.height+",width="+options.width+",toolbar="+options.toolbar+",scrollbars="+options.scrollbars+",status="+options.status+",resizable="+options.resizable+",left="+options.left+",screenX="+options.left+",top="+options.top+",screenY="+options.top;
+                var target = arguments[0] 
+                window.open(target, 'popup', parameters)
+            }
+            </script>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Jura&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Manrope&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Overpass&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Commissioner&display=swap');
+    
+    </style>
+
+<div id="player-controls">
+    <!-- <iframe src="http://online-3.gkvr.ru:8000/status.xsl" frameborder="0"></iframe> -->
+    
+    <div class="control"><div class="button" id="play-previous" conf="1" onclick="new Audio(buttonsounds).play();">
+        <i class="fas fa-backward"></i></div></div>
+        
+    <div class="control"><div class="button" id="play-pause-button" conf="1" onclick="new Audio(buttonsounds).play();">
+        <i class="fas fa-play"></i></div></div>
+            
+    <div class="control"><div class="button" id="play-next" conf="1" onclick="new Audio(buttonsounds).play();">
+        <i class="fas fa-forward" id="true"></i></div></div>
+                
+                <!-- <a target ='additional' onclick="NewTab()"><div id="item1">Добавить бота</div></a> -->
+                
+
+</div>
+<div class="range-input">
+    <input type="range" id="range" min="0" max="100" value="0" step="1">
+    <div class="value"><div>
+
+</div>
+</div>
+</div>
+</div>
+<!-- partial -->
+</body>
+</html>
+<!-- <script  src="./script.js"></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+<!-- <script src="https://raw.githack.com/lisikme/live.ketame.ru/web/list.js"></script> -->
+<!-- <script src="https://raw.githack.com/lisikme/live.ketame.ru/web/config.js"></script> -->
+<!-- <script src="https://raw.githack.com/lisikme/live.ketame.ru/web/ver3.js"></script>   -->
+<script src="https://cdn.statically.io/gh/lisikme/live.ketaru.com/web/list.js"></script>
+<script src="./config.js"></script>
+<script src="./ver3.js"></script>  
