@@ -396,3 +396,26 @@ sliderEl.addEventListener("mousedown", () => {
   aud.volume = 0.5;
   aud.play();
 });
+
+// Создание частиц
+function createParticles() {
+    const container = document.getElementById('floatingParticles');
+    const particleCount = 100;
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.animationDelay = Math.random() * 20 + 's';
+        particle.style.animationDuration = (15 + Math.random() * 15) + 's';
+        const size = 2 + Math.random() * 4;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        container.appendChild(particle);
+    }
+}
+
+// Запуск создания частиц после загрузки страницы
+document.addEventListener('DOMContentLoaded', createParticles);
+document.addEventListener('DOMContentLoaded', function() {
+    createParticles();
+});
