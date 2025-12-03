@@ -480,22 +480,20 @@
                                 top: 1.8px;
                             }
                             .grid-container {
-                                grid-template-rows: 28px 70px 40px 28px auto 30px;
+                                grid-template-rows: 28px 70px 40px 28px auto;
                                 grid-template-areas:
                                     't-info t-info'
                                     "t-display t-display"
                                     "t-player t-player"
                                     "t-volume t-volume"
-                                    "t-menu t-menu"
-                                    "t-apps t-apps";
+                                    "t-menu t-menu";
                             }
                             .selectmenu{
                                 top: 41px !important;
                                 height: 148px !important;
                             }
-                            #downloads{
-                                /* display: none !important; */
-                                font-size: 14px !important;
+                            .g-apps{
+                                display: none !important;
                             }
                             .g-invite{
                                 display: none !important;
@@ -806,9 +804,9 @@
                 top: 43px;
                 left: 8px;
                 right: 8px;
-                background: #00000030;
+                background: #00000096;
                 border: 1px solid #323337;
-                backdrop-filter: blur(2vh);
+                backdrop-filter: blur(1vh);
                 border-radius: 3px;
                 /* display: grid; */
                 display: none;
