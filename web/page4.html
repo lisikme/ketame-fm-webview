@@ -465,12 +465,33 @@
                         .bt {
                             font-size: 14px !important;
                         }
+                        #album-name2 {
+                            height: unset !important;
+                            padding: 4px !important;
+                            font-size: 12px !important;
+                        }
                         @media (max-width: 362px) {
                             #guilds, #radiolist{
                                 top: 1.8px;
                             }
                             .grid-container {
                                 grid-template-rows: 28px 70px 40px 28px auto;
+                                grid-template-areas:
+                                    't-info t-info'
+                                    "t-display t-display"
+                                    "t-player t-player"
+                                    "t-volume t-volume"
+                                    "t-menu t-menu";
+                            }
+                            .selectmenu{
+                                top: 41px !important;
+                                height: 148px !important;
+                            }
+                            .g-apps{
+                                display: none !important;
+                            }
+                            .g-invite{
+                                display: none !important;
                             }
                             #album-name{
                                 font-size: 20px;
@@ -504,8 +525,17 @@
                             #info-app{
                                 font-size: 12px !important;
                             }
+                            #album-name{
+                                font-size: 16px !important;
+                            }
+                            #track-name{
+                                font-size: 8px !important;
+                            }
                             .button, .buttonlink {
-                                font-size: 10px !important;
+                                font-size: 11px !important;
+                            }
+                            #add-bot::after{
+                                font-size: 8px !important;
                             }
                             .btn2{
                                 /* font-size: 12px !important; */
@@ -755,9 +785,9 @@
                 top: 43px;
                 left: 8px;
                 right: 8px;
-                background: #00000030;
+                background: #00000096;
                 border: 1px solid #323337;
-                backdrop-filter: blur(2vh);
+                backdrop-filter: blur(1vh);
                 border-radius: 3px;
                 /* display: grid; */
                 display: none;
@@ -832,7 +862,7 @@
         </style>
     </div>
 </div>
-<div id="use">Обновление приложения уже скоро...</div>
+<!-- <div id="use">Обновление приложения уже скоро...</div>
 <style>
     #use{
         color: #ffffff;
@@ -849,7 +879,7 @@
         margin: 0 auto;
         display: block;
     }
-</style>
+</style> -->
 <!-- <br><br><br><br> -->
 
 </body>
@@ -867,6 +897,12 @@
 <!-- <script src="ver3.js"></script>   -->
 
 <style>
+#album-name{
+    transition: 0.2s all !important;
+}
+#track-name{
+    transition: 0.2s all !important;
+}
 body {
     background: linear-gradient(135deg, #221415 0%, #0d0d18 100%);
 }
@@ -888,23 +924,66 @@ body {
         margin: 0 auto;
     }
 
-    @keyframes slideDown {
-        from {
-            opacity: 0;
-            transform: translateY(-10px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+}
+@keyframes slideShow {
+    from {
+        opacity: 0;
+        /* transform: translateY(-5px); */
+        transform: scale(0);
     }
-
-    .selectmenu.show {
-        display: grid !important;
-        animation: slideDown 0.3s ease-out;
+    to {
+        opacity: 1;
+        transform: scale(1);
     }
 }
 
+@keyframes slideHide {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
+
+.selectmenu {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    overflow: hidden;
+    animation: slideHide 0.1s ease-out forwards;
+}
+
+.selectmenu.show {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    animation: slideShow 0.1s ease-out forwards;
+}
+
+#nums{
+    width: 26px;
+    font-size: 10px !important;
+    right: 0px;
+    border-right: none !important;
+    border-bottom: none !important;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    bottom: 0px;
+    border-top-right-radius: 0px;
+    align-content: center;
+    height: unset;
+}
+#names{
+    left: 40px !important;
+    font-size: 12px !important;
+}
+#stat{
+    left: 40px !important;
+    font-size: 3px !important;
+    display: none;
+}
 @media (min-width: 769px) {
     .body-wrap {
         display: flex;
