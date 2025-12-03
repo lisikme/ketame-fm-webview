@@ -16,7 +16,7 @@ dropdownBtn.addEventListener("click", function (e) {
   aud.volume = 0.5
   aud.play();
   if (dropdownMenu.classList.contains("show")) {
-      dropdownBtn.innerHTML = 'Закрыть меню выбора радиостанцию';
+      dropdownBtn.innerHTML = 'Закрыть меню выбора радиостанций';
   } else {
     dropdownBtn.innerHTML = 'Выбрать радиостанцию из списка'; // или другой текст для закрытого состояния
   }
