@@ -64,6 +64,11 @@
         <meta name="keywords" content="KetaRu, KetaruDev, KetaruDev, fist89, golive, radio, live, music, discord, bot, bots, ketame.ru">
     </head>
     <body>
+        <div class="animated-bg">
+            <div class="gradient-orbs orb-1"></div>
+            <div class="gradient-orbs orb-2"></div>
+        </div>
+        <div class="floating-particles" id="floatingParticles"></div>
         <!-- partial:index.partial.html -->
         <!-- Tracks used in this music/audio player application are free to use. I downloaded them from Soundcloud and NCS websites. I am not the owner of these tracks. -->
         <div id="app-cover">
@@ -238,7 +243,7 @@
                         }
                         .grid-container {
                             margin: 0px auto;
-                            top: 40px;
+                            /* top: 40px; */
                             background: #ffffff30;
                             border: 1px solid #ffffff30;
                             backdrop-filter: blur(2vh);
@@ -465,12 +470,35 @@
                         .bt {
                             font-size: 14px !important;
                         }
+                        #album-name2 {
+                            height: unset !important;
+                            padding: 4px !important;
+                            font-size: 12px !important;
+                        }
                         @media (max-width: 362px) {
                             #guilds, #radiolist{
                                 top: 1.8px;
                             }
                             .grid-container {
-                                grid-template-rows: 28px 70px 40px 28px auto;
+                                grid-template-rows: 28px 70px 40px 28px auto 30px;
+                                grid-template-areas:
+                                    't-info t-info'
+                                    "t-display t-display"
+                                    "t-player t-player"
+                                    "t-volume t-volume"
+                                    "t-menu t-menu"
+                                    "t-apps t-apps";
+                            }
+                            .selectmenu{
+                                top: 41px !important;
+                                height: 148px !important;
+                            }
+                            #downloads{
+                                /* display: none !important; */
+                                font-size: 14px !important;
+                            }
+                            .g-invite{
+                                display: none !important;
                             }
                             #album-name{
                                 font-size: 20px;
@@ -504,8 +532,17 @@
                             #info-app{
                                 font-size: 12px !important;
                             }
+                            #album-name{
+                                font-size: 16px !important;
+                            }
+                            #track-name{
+                                font-size: 8px !important;
+                            }
                             .button, .buttonlink {
-                                font-size: 10px !important;
+                                font-size: 11px !important;
+                            }
+                            #add-bot::after{
+                                font-size: 8px !important;
                             }
                             .btn2{
                                 /* font-size: 12px !important; */
@@ -852,7 +889,7 @@
         display: flex;
         flex-direction: column;
     }
-    #rehvh{
+    #ads{
         display: flex;
         width: 100%;
         border-radius: 3px;
@@ -863,13 +900,13 @@
         text-decoration: none;
         min-height: 30px;
     }
-    #img-rehvh{
+    #img-ads{
         display: flex;
         width: 100%;
         gap: 5px;
         z-index: 2;
     }
-    #text-rehvh{
+    #text-ads{
         display: flex;
         z-index: 1;
         width: 100%;
@@ -882,8 +919,8 @@
         display: flex;
         z-index: 1;
         width: 100%;
-        border: #00335e 1px solid;
-        background: #00203b;
+        border: #323337 1px solid;
+        background: #000000;
         color: #8abdff !important;
         font-size: 12px;
         border-radius: 3px;
@@ -895,12 +932,11 @@
         align-items: center;
     }
 </style>
-<!-- <div class="grid-container" id="grid-ads">
-    <div id="title-ads">Реклама от проекта</div>
-    <a href="https://rehvh.ru/" target="_blank" rel="noopener noreferrer" id="rehvh">
-        <img src="rehvh.gif" alt="" id="img-rehvh">
+<div class="grid-container" id="grid-ads">
+    <a href="https://kensolua.ru" target="_blank" rel="noopener noreferrer" id="ads">
+        <img src="kenso.png" alt="" id="img-ads">
     </a>
-</div> -->
+</div>
 <!-- <div id="use">Новая версия приложения</div>
 <style>
     #use{
@@ -917,14 +953,14 @@
         margin: 0 auto;
         display: block;
     }
-</style> -->
-<br><br><br><br>
+</style>
+<!-- <br><br><br><br> -->
 
 </body>
 </html>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
 <script src="./config.js"></script>
-<script src="./script.js"></script> 
+<script src="./ver4.js"></script> 
 
 
 <!-- <script src="https://cdn.statically.io/gh/lisikme/live.ketame.ru/web/list.js"></script> -->
@@ -933,3 +969,203 @@
 <!-- <script src="list.js"></script> -->
 <!-- <script src="https://raw.githack.com/lisikme/live.ketame.ru/web/error.js"></script>   -->
 <!-- <script src="ver3.js"></script>   -->
+
+
+<style>
+#album-name{
+    transition: 0.2s all !important;
+}
+#track-name{
+    transition: 0.2s all !important;
+}
+@media (max-width: 769px) {
+    body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 16px;
+        margin: 0;
+        font-family: 'Onest', -apple-system, BlinkMacSystemFont, sans-serif;
+        overflow-x: hidden;
+    }
+
+    .body-wrap {
+        width: 100%;
+        max-width: 430px;
+        margin: 0 auto;
+    }
+
+}
+@keyframes slideShow {
+    from {
+        opacity: 0;
+        /* transform: translateY(-5px); */
+        transform: scale(0);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideHide {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
+
+.selectmenu {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    overflow: hidden;
+    animation: slideHide 0.1s ease-out forwards;
+}
+
+.selectmenu.show {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    animation: slideShow 0.1s ease-out forwards;
+}
+
+#nums{
+    width: 30px;
+    font-size: 12px !important;
+    right: 3px;
+    /* border-right: none !important; */
+    border: none !important;
+    /* border-bottom-right-radius: 0px; */
+    /* border-bottom-left-radius: 0px; */
+    bottom: 3px;
+    /* border-top-right-radius: 0px; */
+    align-content: center;
+    height: unset;
+}
+#names{
+    left: 40px !important;
+    font-size: 12px !important;
+}
+#stat{
+    left: 40px !important;
+    font-size: 3px !important;
+    display: none;
+}
+@media (min-width: 769px) {
+    .body-wrap {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+    }
+    #app-cover {
+        width: 430px;
+    }
+}
+
+:root {
+    --primary-color: #ff7235;
+    --primary-glow: rgba(255, 114, 53, 0.4);
+    --bg-color: #0a0a12;
+    --surface-color: #15151f;
+    --text-color: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --accent-color: #5050a1;
+    --gradient: linear-gradient(135deg, #ff7235 0%, #ffaa35 100%);
+}
+
+body {
+    background: linear-gradient(135deg, #221415 0%, #0d0d18 100%);
+}
+body {
+    background: var(--bg-color) !important;
+}
+
+/* Частицы */
+.floating-particles {
+    position: fixed;
+    top: -6px;
+    left: 0;
+    bottom: 0px;
+    width: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--primary-color) !important;
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: floatParticle 20s infinite linear;
+}
+
+@keyframes floatParticle {
+    0% { 
+        transform: translateY(100vh) rotate(0deg); 
+    }
+    100% { 
+        transform: translateY(-100px) rotate(360deg); 
+    }
+}
+
+.parallax-element {
+    will-change: transform;
+}
+
+.animated-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+}
+.gradient-orbs {
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.1;
+    animation: float 20s infinite ease-in-out;
+    z-index: 44;
+}
+.orb-1 {
+    background: var(--primary-color) !important;
+    top: -400px;
+    left: -200px;
+    animation-delay: 0s;
+}
+.orb-2 {
+    background: var(--accent-color) !important;
+    bottom: -400px;
+    right: -200px;
+    animation-delay: -10s;
+}
+@keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(50px, 50px) scale(1.1); }
+    50% { transform: translate(-30px, 70px) scale(0.9); }
+    75% { transform: translate(70px, -30px) scale(1.05); }
+}
+#app-cover{
+    z-index: 1000;
+}
+.grid-container{
+    box-shadow: #00000080 0px 0px 13px 0px;
+    left: 0px !important;
+}
+#bg-artwork{
+    display: none !important;
+}
+</style>
