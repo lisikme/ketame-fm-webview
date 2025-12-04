@@ -181,6 +181,7 @@ var playerTrack=$("#player-track"),
     playNextTrackButton=$("#play-next")
     currIndex=-1;
     
+    
     let url = new URL(window.location.href)
     let par = new URLSearchParams(url.search);
     const select = par.get("id");
@@ -279,6 +280,7 @@ var playerTrack=$("#player-track"),
         audio.src = fm_list[currIndex+Number("2")]; // Radio Server
         currTrack = fm_list[currIndex+Number("3")]; // Radio Status
         currID = (currIndex/5)+1;                   // Radio ID
+        
         console.log({RadioID:Number(currIndex/5+1), RadioName:currAlbum})
       }
       if (flag != 0) {
@@ -398,7 +400,7 @@ sliderEl.addEventListener("mousedown", () => {
 });
 
 // Создание частиц
-function createParticles() {
+function createtrack() {
     const container = document.getElementById('floatingParticles');
     const particleCount = 100;
     for (let i = 0; i < particleCount; i++) {
@@ -415,7 +417,8 @@ function createParticles() {
 }
 
 // Запуск создания частиц после загрузки страницы
-document.addEventListener('DOMContentLoaded', createParticles);
+document.addEventListener('DOMContentLoaded', createtrack);
 document.addEventListener('DOMContentLoaded', function() {
     createParticles();
 });
+
