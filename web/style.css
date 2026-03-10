@@ -463,7 +463,7 @@ a {
         align-items: center;
         text-align: center;
         line-height: normal;
-        top: -1px;
+        /* top: -1px; */
         position: relative;
         transition: 0.3s ease all;
     }
@@ -863,6 +863,11 @@ a {
     .selectmenu{
         top: 41px !important;
         height: 148px !important;
+        display: flex !important;
+        flex-direction: column;
+    }
+    .real-box{
+        display: none;
     }
     .g-apps{
         display: none !important;
@@ -1433,4 +1438,7 @@ body {
 .grid-container{
     box-shadow: #00000080 0px 0px 13px 0px;
     left: 0px !important;
+}
+#grid-ads{
+    display: none !important;
 }
