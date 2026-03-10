@@ -399,7 +399,7 @@ body {
 
 /* Панель управления */
 #app-cover {
-    animation: ani .5s forwards;
+    animation: ani .9s forwards;
     /* position: absolute; */
     position: relative;
     /* top: 40px; */
