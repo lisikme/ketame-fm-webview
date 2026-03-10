@@ -1,0 +1,145 @@
+<!-- Форматирование -->
+<!DOCTYPE html>
+<html lang="ru" class="no-js">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <head>
+        <meta charset="utf-8">
+        <meta name="robots" content="noyaca" />
+        <meta name="yandex-verification" content="2d8c1dcb18ad48b7"/>
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+        <meta property="og:title" content="KetaMeRadio Web">
+        <meta property="og:site_name" content="KetaRu">
+        <meta property="og:url" content="https://live.ketame.ru">
+        <meta property="og:description" content="Наше онлайн версия радио бота">
+        <link rel="shortcut icon" href="https://i.imgur.com/yDm8NLA.png">
+        <meta property="og:image" content="https://i.imgur.com/yDm8NLA.png">
+        <meta property="og:image:width" content="900">
+        <meta property="og:image:height" content="900">
+        <meta name="theme-color" content="#e43f79">
+        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.3.1/css/all.css'>
+        <link rel="stylesheet" href="./style.css">
+        <meta name="yandex-verification" content="bef8770f64b65879" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Слушать радиостанции онлайн">
+        <meta name="keywords" content="KetaRu, KetaruDev, KetaruDev, fist89, golive, radio, live, music, discord, bot, bots, ketame.ru">
+        <script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
+        <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+        <script>
+            function NewTab(url){
+                var options={
+                    height: 820, // устанавливает высоту окна в пикселях.
+                    width: 680, // устанавливает ширину окна в пикселях.
+                    toolbar: 0, // определяет, отображается ли панель инструментов (включая кнопки вперед и назад) {1 (ДА) или 0 (НЕТ)}.
+                    scrollbars: 0, // определяет, появятся ли полосы прокрутки в окне {1 (ДА) или 0 (НЕТ)}.
+                    status: 0, // отображается ли строка состояния внизу окна {1 (ДА) или 0 (НЕТ)}.
+                    resizable: 0, // можно ли изменить размер окна {1 (ДА) или 0 (НЕТ)}. Также может быть перегружен с помощью resizable.
+                    left: (screen.width-680)/2, // левое положение при появлении окна.
+                    top: (screen.height-890)/2, // верхнее положение при появлении окна.
+                    center: 1, // мы должны центрировать окно? {1 (ДА) или 0 (НЕТ)}. переопределяет верхний и левый
+                    createnew: 0, // должны ли мы создавать новое окно для каждого события {1 (ДА) или 0 (НЕТ)}.
+                    location: 0, // определяет, отображается ли адресная строка {1 (ДА) или 0 (НЕТ)}.
+                    menubar: 0 // определяет, отображается ли строка меню {1 (ДА) или 0 (НЕТ)}.
+                };
+                var parameters="location="+options.location+",menubar="+options.menubar+",height="+options.height+",width="+options.width+",toolbar="+options.toolbar+",scrollbars="+options.scrollbars+",status="+options.status+",resizable="+options.resizable+",left="+options.left+",screenX="+options.left+",top="+options.top+",screenY="+options.top;
+                var target = arguments[0] 
+                window.open(target, 'popup', parameters)
+            }
+        </script>
+    </head>
+<!-- Шапка страницы -->
+<div class="body-wrap">
+    <body>
+        <div class="animated-bg">
+            <div class="gradient-orbs orb-1"></div>
+            <div class="gradient-orbs orb-2"></div>
+        </div>
+        <div class="floating-particles" id="floatingParticles"></div>
+        <div id="app-cover">
+            <style>
+                /* html, body{
+                    background: #18181a;
+                } */
+                #bg-artwork{
+                    display: none;
+                }
+            </style>
+            <div id="bg-artwork"></div>
+            <div id="player">
+                <div id="player-track">
+                    <div id="s-area"></div>
+                </div>
+                <div id="player-content">
+                    <div class="grid-container">
+                        <div class="g-info">
+                            <div id="info-app">
+                                <span id="guilds">0</span>
+                                <span id="space">.</span>
+                                <span id="radiolist">0</span>
+                            </div>
+                            <script src="https://krcorpserver.github.io/db-ketaru/serv.js"></script>
+                            <script src="https://live.ketame.ru/list.js"></script>
+                            <script>
+                                var global_list = fm_list.length/5
+                                document.getElementById('guilds').innerText = bot_guilds
+                                document.getElementById('radiolist').innerText = global_list
+                            </script>
+                        </div>
+                        <div class="g-display">
+                            <div id="box-play">
+                                <div id="player-info-box">
+                                    <div id="album-art-bg" style="background-image: url(./); background-size: cover;"></div>
+                                    <div id="album-art" style="background-image: url(./); background-size: cover;" class="active"></div>
+                                    <div id="player-info-live">
+                                        <div id="album-name" class="buffa">Загрузка</div>
+                                        <div id="track-name">---</div>
+                                    </div>
+                                </div>
+                                <span id="idfm" class="number active">---</span>
+                                <div id="err">Недоступно</div>
+                            </div>
+                        </div>
+                        <div class="g-player">
+                            <div class="button" id="play-previous" sound="true">
+                                <i class="fas fa-backward"></i></div>
+                            <div class="button" id="play-pause-button" sound="true">
+                                <i class="fas fa-play"></i></div>
+                            <div class="button" id="play-next" sound="true">
+                                <i class="fas fa-forward"></i></div>
+                        </div>
+                        <div class="g-invite">
+                            <button class="buttonlink" id="add-bot" onclick="NewTab('https://discord.com/oauth2/authorize?client_id=1392384290066796707')">KetaMeRadio</button>
+                        </div>
+                        <div class="g-volume">
+                            <div class="range-input">
+                                <input type="range" id="range" min="0" max="100" value="0" step="1">
+                                <div class="value"><div>---</div></div>
+                        </div>
+                        </div>
+                        <div class="g-apps">
+                            <!-- <button id="nonebutton" class="buttonlink"></button> -->
+                            <button onclick="window.open('https://live.ketame.ru/downloads', '_blank')" class="buttonlink" id="downloads">Скачать приложение</button>
+                        </div>
+                        <div class="g-menu">
+                            <button class="btn2 bt" id="btn">Выбрать радиостанцию из списка</button>
+                            <div class="selectmenu" id="selectmenu">
+                                <div class="real-box">
+                                    <div id="album-art2" style="background-image: url(&quot;./img/fm_rts.png&quot;); background-size: cover;" class="active"></div>
+                                    <div id="album-name2">Загрузка</div>
+                                </div>
+                                <div class="dropdown" id="dropdown"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid-container" id="grid-ads">
+                        <a href="https://kensolua.ru" target="_blank" rel="noopener noreferrer" id="ads">
+                            <img src="kenso.png" alt="" id="img-ads">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script src="./config.js"></script>
+<script src="./ver5.js"></script>
