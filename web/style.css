@@ -73,12 +73,12 @@
     left: 50px;
     font-size: 16px;
     font-weight: 600;
-    margin-bottom: 15px;
+    /* margin-bottom: 15px; */
     color: #53fbc9;
 }
 #immm{
-    height: 30px;
-    width: 30px;
+    height: 24px;
+    width: 24px;
     border-radius: 3px;
 }
 #stat{
@@ -186,8 +186,14 @@
     }
 
 @keyframes ani {
-    0%   {left: -120px}
-    100% {left: -2px}
+    0%   {
+        left: -120px;
+        opacity: 0;
+    }
+    100% {
+        left: 0px;
+        opacity: 1;
+    }
 }
 @keyframes buff {
     0%   {opacity: 0;}
@@ -197,24 +203,6 @@
 @keyframes bg {
     0%   {opacity: .0; transform: scale(2);}
     100% {opacity: .3;}
-}
-@-webkit-keyframes rotateAlbumArt {
-    0% {
-        transform: rotateZ(0);
-    }
-    
-    100% {
-        transform: rotateZ(360deg);
-    }
-}
-@keyframes rotateAlbumArt {
-    0% {
-        transform: rotateZ(0);
-    }
-    
-    100% {
-        transform: rotateZ(360deg);
-    }
 }
 @keyframes ar {
     0%   {
@@ -368,6 +356,7 @@ body {
     padding: 2px 15px !important;
 }
 #album-art {
+    /* animation: ani .5s forwards; */
     & {
         opacity: 1;
         /* background: #0c1116; */
@@ -410,7 +399,7 @@ body {
 
 /* Панель управления */
 #app-cover {
-    animation: ani .9s forwards;
+    animation: ani .5s forwards;
     /* position: absolute; */
     position: relative;
     /* top: 40px; */
@@ -961,7 +950,7 @@ a {
 }
 #album-art{
     backdrop-filter: blur(20px); 
-    background: #00000099;
+    /* background: #00000099; */
     position: unset;
     opacity: 1;
     position: unset;
@@ -1320,16 +1309,17 @@ a {
     animation: slideShow 0.1s ease-out forwards;
 }
 #nums{
-    width: 30px;
-    font-size: 12px !important;
+    width: 24px;
+    height: 24px;
+    font-size: 10px !important;
     right: 3px;
     border: none !important;
-    bottom: 3px;
+    /* bottom: 3px; */
     align-content: center;
-    height: unset;
+    /* height: unset; */
 }
 #names{
-    left: 40px !important;
+    left: 35px !important;
     font-size: 12px !important;
 }
 #stat{

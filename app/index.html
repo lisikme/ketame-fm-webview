@@ -73,24 +73,41 @@
             border-radius: 10px;
         }
 
-        #df {
-            animation: bg 1s ease;
-            font-family: onest;
-            position: absolute;
-            font-size: 15px;
-            left: 70px;
-            bottom: 15px;
-        }
-
-        #df1 {
-            animation: bg 1s ease;
-            font-family: onest;
-            color: #999;
-            position: absolute;
-            font-size: 12px;
-            left: 88px;
-            bottom: 0px;
-        }
+    #df{
+        animation: bg 1s ease;
+        /* font-family: onest; */
+        font-family: "Unbounded", sans-serif !important;
+        position: absolute;
+        font-weight: 200;
+        font-size: 12px;
+        left: 0px !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        /* background: #191923; */
+        right: 0px !important;
+        margin: auto 0 !important;
+        bottom: 5px;
+        gap: 5px;
+    }
+    #df > sp{
+        position: relative;
+        top: -1px;
+        color: #999;
+    }
+    #df1{
+        
+        animation: bg 1s ease;
+        /* font-family: onest; */
+        color: #999;
+        font-family: "Unbounded", sans-serif !important;
+        position: absolute;
+        font-weight: 100;
+        font-size: 12px;
+        left: 88px;
+        bottom: 0px;
+    }
 
         li.footer-link.mb-10 {
             height: 28px !important;
@@ -220,8 +237,109 @@
     <!-- Header Section -->
     <header id="site-header">
         <type id="page-name">
-            <span id="namm">KetaMeRadio<span id="rel">БЕТА</span></span>
-            <span id="nam">APP - Приложение</span>
+            <span id="namm">KetaMeFM<span id="rel">BETA</span></span>
+            <style>
+                #logo-text {
+                    color: #fff;
+                }
+                
+                #logo-text::after {
+                    content: "|";
+                    color: rgb(255, 255, 255);
+                    animation: blink .8s infinite;
+                }
+                @keyframes blink {
+                    0%, 100% { opacity: .8; }
+                    50% { opacity: 0; }
+                }
+                
+                .colored {
+                    color: var(--color);
+                }
+                #logo-text, .colored{
+                    font-family: Unbounded, sans-serif !important;
+                }
+            </style>
+            <span id="nam"><span id="logo-text"></span></span>
+            <style>
+                cl{color: #91d7ff}
+            </style>
+            <script>
+                const phrases = [
+                    '{#000000::⚡}{#9e9e9e::Приложение}', 
+                    '{#000000::✨}{#99FF99::Бесплатно!}', 
+                    '{#000000::⚙️}{#FF6666::Работает 24/7}', 
+                    '{#000000::🏆}{#ffdb5c::Мы #1...}',
+                ];
+                let current = 0;
+                let isDeleting = false;
+                let text = '';
+                let index = 0;
+                let typingSpeed = 150; // скорость печати (мс)
+                function parseFormattedText(phrase) {
+                    const regex = /{([^}]+)::([^}]+)}/g;
+                    let match;
+                    let lastIndex = 0;
+                    const parts = [];
+                    while ((match = regex.exec(phrase)) !== null) {
+                        if (match.index > lastIndex) {
+                            parts.push({text: phrase.substring(lastIndex, match.index), color: null});
+                        }
+                        parts.push({text: match[2], color: match[1]});
+                        lastIndex = match.index + match[0].length;
+                    }
+                    if (lastIndex < phrase.length) {
+                        parts.push({text: phrase.substring(lastIndex), color: null});
+                    }
+                    return parts;
+                }
+                function buildTextElement(parts, currentLength) {
+                    let result = '';
+                    let accumulatedLength = 0;
+                    for (const part of parts) {
+                        if (accumulatedLength >= currentLength) break;
+                        const partText = part.text;
+                        const availableLength = currentLength - accumulatedLength;
+                        const displayText = partText.substring(0, availableLength);
+                        if (part.color) {
+                            result += `<span class="colored" style="--color: ${part.color}">${displayText}</span>`;
+                        } else {result += displayText;}
+                        accumulatedLength += partText.length;
+                    }
+                    return result;
+                }
+                function type() {
+                    const currentPhrase = phrases[current];
+                    const isFormatted = currentPhrase.includes('{');
+                    if (isDeleting) {index--;} else {index++;}
+                    if (isFormatted) {
+                        const parts = parseFormattedText(currentPhrase);
+                        text = buildTextElement(parts, index);
+                    } else {
+                        text = currentPhrase.substring(0, index);
+                    }
+                    document.getElementById('logo-text').innerHTML = text;
+                    if (!isDeleting && index === currentPhrase.length) {
+                        // Пауза после полного набора
+                        typingSpeed = 1000;
+                        isDeleting = true;
+                    } else if (isDeleting && index === 0) {
+                        // Переход к следующей фразе
+                        isDeleting = false;
+                        current = (current + 1) % phrases.length;
+                        typingSpeed = 500;
+                    } else if (isDeleting) {
+                        // Ускорение удаления
+                        typingSpeed = 40;
+                    } else {
+                        // Обычная скорость набора
+                        typingSpeed = 40;
+                    }
+                    setTimeout(type, typingSpeed);
+                }
+                // Запускаем анимацию
+                setTimeout(type, 1000);
+            </script>
         </type>
         <div id="site-header-box">
             <a>
@@ -246,9 +364,10 @@
     </header>
 
     <!-- Main Content -->
-    <img src="./prom.png" alt="" id="errr">
-    <h1 id="df">KR.Corp - Music</h1>
-    <h1 id="df1">Организатор</h1>
+    <!-- <img src="./prom.png" alt="" id="errr"> -->
+    <!-- <h1 id="df">KR.Corp - Music</h1> -->
+    <!-- <h1 id="df1">Организатор</h1> -->
+    <div id="df">Bisk-Live<sp>x</sp>KetaMeFM</div>
 
     <div style="display: none;" id="inf">
         <span id="guilds"></span>
@@ -256,7 +375,7 @@
         <span id="radiolist"></span>
     </div>
 
-    <iframe id="q" src="../web/page4.html" width="100%" height="100%"></iframe>
+    <iframe id="q" src="../web/page4-v2.html" width="100%" height="100%"></iframe>
 
     <!-- Scripts -->
     <script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
