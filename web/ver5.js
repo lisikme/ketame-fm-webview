@@ -78,7 +78,6 @@ var sfxsel = new Audio(selectsfx);
 function doSomething(x) {
   var PREV = document.querySelector('#play-previous');
   var NEXT = document.querySelector('#play-next');
-  var currIndex = (x * 5)-6
   var fff = document.querySelector('.number').innerHTML
   
   if (x < fff){
@@ -123,7 +122,6 @@ function doSomething(x) {
 });
 
 $(function () {
-  var result = ''; 
   var i = -4; 
   do {
     i += 5; 
@@ -142,24 +140,18 @@ $(function () {
       bglogo=$("#album-art"),
       bglogo1=$("#album-art2"),
       bglogobg=$("#album-art-bg"),
-      bgArtworkUrl,
       albumName=$("#album-name"),
       albumName2=$("#album-name2"),
       trackName=$("#track-name"),
       albumArt=$("#album-art"),
-      albumArt1=$("#album-art2"),
-      albumArtBg=$("#album-art-bg"),
       idfm=$("#idfm"),
       sArea=$("#s-area"),
       seekBar=$("#seek-bar"),
       trackTime=$("#track-time"),
-      insTime=$("#ins-time"),
       sHover=$("#s-hover"),
       playPauseButton=$("#play-pause-button"),
-      i=playPauseButton.find("i"),
-      tProgress=$("#current-time"),
-      tTime=$("#track-length"),
-      seekT,seekLoc,seekBarPos,cM,ctMinutes,ctSeconds,curMinutes,curSeconds,durMinutes,durSeconds,playProgress,bTime,nTime=0,buffInterval=null,tFlag=false,
+      i=playPauseButton.find("svg"),
+      seekT,seekLoc,bTime,nTime=0,buffInterval=null,tFlag=false,
       
       playPreviousTrackButton=$("#play-previous")
       playNextTrackButton=$("#play-next")
@@ -168,7 +160,6 @@ $(function () {
       let url = new URL(window.location.href)
       let par = new URLSearchParams(url.search);
       const select = par.get("id");
-      var currtrc = fm_list[currIndex+Number("0")]
       if (`${select}` === `null`) {
         var currIndex = (1 * 5)-6;
       }
@@ -177,7 +168,6 @@ $(function () {
       }
       
       // Переменные для управления переподключением
-      let reconnectAttempts = 0;
       let reconnectTimer = null;
       let isPlaying = false;
       let currentAudioUrl = '';
@@ -192,7 +182,8 @@ $(function () {
             albumArt.addClass("active");
             idfm.addClass("active");
             checkBuffering();
-            i.attr("class", "fas fa-pause");
+            i.filter(".fa-pause").attr("style", "");
+            i.filter(".fa-play").attr("style", "display: none;");
             audio.play().catch(error => {
               console.log("Playback failed:", error);
               handlePlaybackError();
@@ -205,7 +196,8 @@ $(function () {
             idfm.removeClass("active");
             clearInterval(buffInterval);
             albumArt.removeClass("buffering");
-            i.attr("class", "fas fa-play");
+            i.filter(".fa-pause").attr("style", "display: none;");
+            i.filter(".fa-play").attr("style", "");
             audio.pause();
             updateMediaSession('pause');
           }
@@ -364,12 +356,14 @@ $(function () {
         
         if (currIndex > -1 && currIndex < fm_list.length) {
           if (flag == 0) {
-            i.attr("class", "fa fa-play")
+            i.filter(".fa-pause").attr("style", "display: none;");
+            i.filter(".fa-play").attr("style", "");
           }
           else {
             rl1.removeClass("buff");
             rl1.removeClass("errbuff");
-            i.attr("class", "fa fa-pause");
+            i.filter(".fa-pause").attr("style", "");
+            i.filter(".fa-play").attr("style", "display: none;");
           }
           seekBar.width(0);
           trackTime.removeClass("active");

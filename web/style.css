@@ -431,10 +431,20 @@ a {
     }
 }
 
+/* #play-pause-button>svg {
+    height: 18px;
+
+}
+#play-pause-button {
+    fill: #ff6c6c;
+} */
+
+
 /* Кнопки сайта */
 .button {
     & {
         background: #00000085;
+        fill: #8abdff;
         color: #8abdff;
         cursor: pointer;
         text-align: center;
@@ -444,28 +454,34 @@ a {
         border-radius: 3px;
         padding: 0 0px;
         box-shadow: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    & svg {
+        display: block;
+        fill: #8abdff;
+        color: #8abdff;
+        height: 24px;
+        width: 24px;
+        align-items: center;
+        text-align: center;
+        line-height: normal;
+        position: relative;
+        transition: 0.3s ease all;
+        filter: drop-shadow(0 0 0px rgb(255, 255, 255));
     }
     &:hover {
         & {
             background: #22222285;
             color: #ffffff;
+            fill: #ffffff;
         }
-        & i {
+        & svg {
             color: rgb(255, 255, 255);
-            font-size: 30px;
-            text-shadow: 0px 0px 5px rgb(255, 255, 255);
+            fill: rgb(255, 255, 255);
+            filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
         }
-    }
-    & i {
-        display: block;
-        color: #8abdff;
-        font-size: 25px;
-        align-items: center;
-        text-align: center;
-        line-height: normal;
-        /* top: -1px; */
-        position: relative;
-        transition: 0.3s ease all;
     }
 }
 
