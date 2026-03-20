@@ -299,13 +299,14 @@ body {
         width: 100%;
         height: 100%;
         position: relative;
-        background: rgb(2,0,36);
-        background: linear-gradient(41deg, #111111 0%, #5a2c5e 100% 100%);
+        background: rgb(0, 0, 0);
+        /* background: linear-gradient(41deg, #111111 0%, #5a2c5e 100% 100%); */
         /* background: url(https://cdn1.ozone.ru/s3/multimedia-v/6430244203.jpg); */
         /* background: url(https://cdn.prod.website-files.com/5f9072399b2640f14d6a2bf4/6124024934aa8718da9fb6fd_1_4YkOfk2dNswnXU0t1rNAvA.png); */
-        background: url(https://i.pinimg.com/originals/a6/3d/3d/a63d3d239c13bc2e31de7eb285639fc6.jpg);
+        /* background: url(https://i.pinimg.com/originals/a6/3d/3d/a63d3d239c13bc2e31de7eb285639fc6.jpg); */
         /* background: url(https://bogatyr.club/uploads/posts/2023-03/1679350526_bogatyr-club-p-temnii-fon-muzhskoi-krasivo-1.jpg); */
         /* background: url(https://images.wallpaperscraft.ru/image/single/fon_nebo_tochki_83482_2560x1600.jpg); */
+        background: url(./bg.png);
         background-size: 100% auto;
         -webkit-background-size: 100% auto;
         -moz-background-size: 100% auto;
