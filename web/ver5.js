@@ -11,7 +11,7 @@ dropdownBtn.addEventListener("click", function (e) {
   e.stopPropagation();
   toggleDropdown();
   var aud = new Audio(selectsounds)
-  aud.volume = 0.5
+  aud.volume = buttonvol
   aud.play();
   if (dropdownMenu.classList.contains("show")) {
       dropdownBtn.innerHTML = 'Закрыть меню выбора радиостанций';
@@ -61,7 +61,7 @@ $(function() {
   });
 });
 
-var buttonvol = '0.3'
+var buttonvol = '1'
 var buttonsounds = './sounds/sfx13.mp3'
 var selectsounds = './sounds/sfx13.mp3'
 var selectsfx = './sounds/sfx13.mp3' 
@@ -576,7 +576,7 @@ sliderEl.addEventListener("input", (event) => {
 // Звук только при нажатии (не при перемещении)
 sliderEl.addEventListener("mousedown", () => {
   var aud = new Audio(selectsounds);
-  aud.volume = 0.5;
+  aud.volume = buttonvol;
   aud.play();
 });
 
