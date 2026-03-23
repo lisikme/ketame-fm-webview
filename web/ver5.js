@@ -62,9 +62,9 @@ $(function() {
 });
 
 var buttonvol = '0.3'
-var buttonsounds = './sounds/sfx4.mp3'
-var selectsounds = './sounds/sfx3.mp3'
-var selectsfx = './sounds/sfx4.mp3'
+var buttonsounds = './sounds/sfx13.mp3'
+var selectsounds = './sounds/sfx13.mp3'
+var selectsfx = './sounds/sfx13.mp3' 
 
 function button() {
   var sfx = new Audio()
@@ -258,7 +258,7 @@ $(function () {
             rl2.removeClass("errbuffa");
             var errs = true;
             if (errs && !lastErrState) {
-              var sound = new Audio('./sounds/sfx8.mp3');
+              var sound = new Audio('./sounds/sfx7.mp3');
               sound.volume = buttonvol;
               sound.play();
               if (!isManuallyPaused && isPlaying) {
