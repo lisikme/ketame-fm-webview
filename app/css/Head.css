@@ -1,59 +1,78 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 /* Фон для страницы */
 @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap');
 #tesx2::after {
     font-family: "Unbounded", sans-serif;
     position: absolute;
-    top: 16px;
-    left: 1px;
+    top: 12px;
+    left: 0;
     content: 'by kelix.me';
-    font-size: 12px;
-    font-weight: 600;
-    background: linear-gradient(135deg, #ff77e2 0%, #ff6f6f 100%) !important;
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    background-clip: text !important;
+    white-space: nowrap;
+    font-size: 9px;
+    line-height: 11px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: transparent;
+    background-image: linear-gradient(90deg, #6b6b6b 0%, #e6e6e6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#site-logo-name2 {
+    display: block;
+    margin: 0;
+    padding: 0;
+    line-height: 0;
 }
 #tesx2 {
     font-family: "Unbounded", sans-serif;
     display: flex;
+    align-items: baseline;
+    gap: 0;
     position: relative;
-    top: -7px;
+    top: 0;
+    background-image: linear-gradient(90deg, #ff3d8f 0%, #ffc7e3 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    line-height: 12px;
+    padding-bottom: 12px;
 }
 #site-logo-box2 {
-    background: rgba(255, 255, 255, 0.1);
     display: inline-flex;
-    padding: 0px;
+    align-items: center;
+    gap: 8px;
+    padding: 3px 8px 3px 3px;
+    border: 1px solid #1c1c1c;
     border-radius: 5px;
-    padding: 4px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
-    padding-right: 6px;
-    gap: 6px;
+    background: #0a0a0a;
+    backdrop-filter: none;
+    align-self: center;
+    margin: 0;
 }
 #ketaru2 {
-    font-family: "Unbounded", sans-serif;
-    background: linear-gradient(135deg, #ff35a4 0%, #fff235 100%) !important;
-    -webkit-background-clip: text !important;
+    font-family: "Unbounded", sans-serif !important;
+    background: none !important;
+    -webkit-background-clip: border-box !important;
     -webkit-text-fill-color: transparent !important;
-    background-clip: text !important;
-    font-weight: 600 !important;
-    font-size: 20px;
-    position: relative !important;
-    top: -0px !important;
+    background-clip: border-box !important;
+    font-weight: 500 !important;
+    font-size: 11px !important;
+    letter-spacing: 0.04em;
+    color: transparent;
+    position: static !important;
     text-transform: uppercase !important;
 }
 #corp2 {
-    background: linear-gradient(135deg, #4c9aff 0%, #9ddbff 100%) !important;
-    -webkit-background-clip: text !important;
-    font-weight: 600 !important;
-    font-size: 20px !important;
+    font-family: "Unbounded", sans-serif !important;
+    background: none !important;
+    -webkit-background-clip: border-box !important;
     -webkit-text-fill-color: transparent !important;
-    background-clip: text !important;
-    /* color: #eeff8b !important; */
-    position: relative !important;
-    left: 0px !important;
-    bottom: 0px !important;
+    background-clip: border-box !important;
+    font-weight: 500 !important;
+    font-size: 11px !important;
+    letter-spacing: 0.04em;
+    color: transparent;
+    position: static !important;
     text-transform: uppercase !important;
 }
 
@@ -61,24 +80,51 @@
     width: 100%;
     /* position: fixed; */
     z-index: 1000;
-    height: 58px;
-    background: #020817;
-    margin: 50% auto;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    box-shadow: 2px 2px 4px #080c0f70;
+    height: 46px;
+    background: #000000;
+    margin: 0;
+    box-shadow: none;
 
-    backdrop-filter: blur(5px);
-    background-color: rgba(0, 0, 0, 0.7);
-    border-bottom: #272727 solid 1px;
+    backdrop-filter: blur(12px);
+    background-color: rgba(0, 0, 0, 0.9);
+    border-bottom: #1c1c1c solid 1px;
 }
 #site-header-box{
-    padding: 8px 10px 5px 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 12px;
     max-width: 1315px;
-    height: 58px;
-    margin: 50% auto;
-    margin-top: 0px;
-    margin-bottom: 0px;
+    height: 46px;
+    margin: 0 auto;
+}
+#site-logo-link{
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    align-self: center;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background: none;
+    text-decoration: none;
+}
+#site-logo-link,
+#site-logo-link:link,
+#site-logo-link:visited,
+#site-logo-link:hover,
+#site-logo-link:active,
+#site-logo-link:focus,
+#site-logo-link:focus-visible{
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    text-decoration: none !important;
+    color: inherit !important;
 }
 
 body {
@@ -345,9 +391,10 @@ img, svg {
     padding: 4px;
 }
 #site-logo-img{
-    height: 30px;
-    width: 30px;
-    border-radius: 5px;
+    height: 24px;
+    width: 24px;
+    border-radius: 3px;
+    border: 1px solid #1c1c1c;
     /* position: absolute; */
 }
 #site-logo-name{
@@ -415,11 +462,11 @@ main{
     padding: 15px 25px;
 }
 main> *, #site-logo-box, #site-logo-box2{
-    transform: translateX(); 
-    animation: AnimX .5s forwards;
+    transform: none;
+    animation: none;
 }
 #page-name{
-    animation: AnimY .5s forwards;
+    animation: none;
 }
 header{
     animation: none;
@@ -513,61 +560,71 @@ A, A:visited, A:active{
 --VerPage: "KetaRu Web";
 }
 #rel{
-    color: #a0d6ff;
-    background: #1a2c5a;
-    border: 1px solid #5182ff;
-    font-family: rubik !important;
-    padding: 1px 8px 0px 8px;
-    height: 20px;
-    align-content: center;
+    color: #a1a1a1;
+    background: #141414;
+    border: 1px solid #2e2e2e;
+    font-family: "Unbounded", sans-serif !important;
+    padding: 0 6px;
+    height: 16px;
+    display: inline-flex;
+    align-items: center;
     border-radius: 3px;
-    font-size: 14px;
-    font-weight: 400;
-    left: 4px;
-    top: 5px;
-    position: relative;
-    margin-left: 10px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    align-self: center;
+    margin: 0;
+    position: static;
 }
 #namm{
     font-family: "Unbounded", sans-serif !important;
-    position: absolute;
-    display:inline-block;
-    left: 149px;
-    font-size: 18px;
-    font-weight: 400;
-    
-    /* width: 100%; */
-    top: 1px;
+    position: static;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    margin: 0;
     /* font-family: onest !important; */
-    color: #9ebcff;
+    color: #ededed;
 }
 #nam{
     font-family: "Unbounded", sans-serif !important;
     white-space: nowrap;
-    position: absolute;
-    display:inline-block;
-    left: 150px;
-    font-size: 12px;
+    position: static;
+    display: block;
+    font-size: 10px;
     font-weight: 400;
-    
-    /* width: 100%; */
-    top: 21px;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
     /* font-family: onest !important; */
-    color: #9e9e9e;
+    color: #6b6b6b;
 }
 #page-name{
-    max-width: 1315px;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    line-height: normal;
-    /* background: #00ffea; */
-    height: 100%;
-    font-size: 20px !important;
-    top: 8px;
-    position: absolute !important;
+    position: static !important;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    gap: 0;
+    min-width: 0;
+    width: auto;
+    max-width: none;
+    height: auto;
+    margin: 0;
+    left: auto;
+    right: auto;
+    top: auto;
+    text-align: left;
+    line-height: 1.15;
+    font-size: 15px !important;
+    animation: none;
     /* top: 18px !important; */
-    font-family: 'onest' !important;
+    font-family: "Unbounded", sans-serif !important;
 }
 #inf{
     backdrop-filter: blur(2vh);

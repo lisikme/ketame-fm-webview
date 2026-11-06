@@ -28,52 +28,10 @@ document.documentElement.addEventListener("click", function () {
   }
 });
 
-function playSound() {
-  var sound = new Audio(buttonsounds);
-  sound.volume = buttonvol
-  sound.play();
-}
-
-$(function() {
-  var fontSize = 12;
-  var imgScales = { small: 0.25, normal: 0.50, large: 1.00 }
-
-  function setFontSize(fontSize) {
-    var zoomLevel = 'normal';
-    if (fontSize <= 9)
-      zoomLevel = 'small';
-    else if (fontSize >= 15)
-      zoomLevel = 'large';
-    var imgScale = imgScales[zoomLevel];
-    $('#root').css('font-size', fontSize + 'pt');
-    $('#root').removeClass('zoom-small zoom-normal zoom-large');
-    $('#root').addClass('zoom-' + zoomLevel);    
-    $('img.scalable').each(function() {
-      $(this).css('width', this.naturalWidth * imgScale);
-      $(this).css('height', this.naturalHeight * imgScale);
-    });
-  }
-  $('#plus').on('click', function() {
-    setFontSize(++fontSize);
-  });
-  $('#minus').on('click', function() {
-    setFontSize(--fontSize);
-  });
-});
-
 var buttonvol = '1'
+var audio = null
 var buttonsounds = './sounds/sfx13.mp3'
 var selectsounds = './sounds/sfx13.mp3'
-var selectsfx = './sounds/sfx13.mp3' 
-
-function button() {
-  var sfx = new Audio()
-  sfx.url = buttonsounds
-  sfx.volume = buttonvol
-  sfx.play()
-}
-
-var sfxsel = new Audio(selectsfx);
 
 function doSomething(x) {
   var PREV = document.querySelector('#play-previous');
@@ -145,13 +103,9 @@ $(function () {
       trackName=$("#track-name"),
       albumArt=$("#album-art"),
       idfm=$("#idfm"),
-      sArea=$("#s-area"),
-      seekBar=$("#seek-bar"),
-      trackTime=$("#track-time"),
-      sHover=$("#s-hover"),
       playPauseButton=$("#play-pause-button"),
       i=playPauseButton.find("svg"),
-      seekT,seekLoc,bTime,nTime=0,buffInterval=null,tFlag=false,
+      bTime,nTime=0,buffInterval=null,
       
       playPreviousTrackButton=$("#play-previous")
       playNextTrackButton=$("#play-next")
@@ -159,19 +113,34 @@ $(function () {
       
       let url = new URL(window.location.href)
       let par = new URLSearchParams(url.search);
-      const select = par.get("id");
-      if (`${select}` === `null`) {
-        var currIndex = (1 * 5)-6;
-      }
-      else {
-        var currIndex = (select * 5)-6
+      let totalStations = Math.floor(fm_list.length / 5);
+      let startId = parseInt(par.get("id"), 10);
+      if (!startId || startId < 1) startId = 1;
+      if (totalStations > 0 && startId > totalStations) startId = totalStations;
+      var currIndex = (startId * 5)-6;
+
+      function syncStationUrl(stationId) {
+        try {
+          var next = new URL(window.location.href);
+          if (next.searchParams.get("id") === String(stationId)) return;
+          next.searchParams.set("id", String(stationId));
+          window.history.replaceState(null, "", next.pathname + next.search + next.hash);
+        } catch (e) {}
       }
       
       // Переменные для управления переподключением
       let reconnectTimer = null;
+      let reconnectAttempts = 0;
       let isPlaying = false;
       let currentAudioUrl = '';
       let isManuallyPaused = false;
+      let pausedByUser = false;
+      let hasConnected = false;
+      let errorSoundPlayed = false;
+      let okTicks = 0;
+      let lastErrorSoundAt = 0;
+      const OK_TICKS_TO_REARM = 2;
+      const ERROR_SOUND_COOLDOWN = 15000;
       
       function playPause() {
         setTimeout(function () {
@@ -181,6 +150,11 @@ $(function () {
             playerTrack.addClass("active");
             albumArt.addClass("active");
             idfm.addClass("active");
+            if (pausedByUser) {
+              pausedByUser = false;
+              // Возврат с паузы: переподключаемся к живому краю эфира
+              audio.load();
+            }
             checkBuffering();
             i.filter(".fa-pause").attr("style", "");
             i.filter(".fa-play").attr("style", "display: none;");
@@ -191,6 +165,7 @@ $(function () {
             updateMediaSession('play');
           } else {
             isManuallyPaused = true;
+            pausedByUser = true;
             playerTrack.removeClass("active");
             albumArt.removeClass("active");
             idfm.removeClass("active");
@@ -204,23 +179,9 @@ $(function () {
         }, 300);
       }
       
-      function hideHover() {
-        sHover.width(0);
-      }
-      
-      function playFromClickedPos() {
-        audio.currentTime = seekLoc;
-        seekBar.width(seekT);
-        hideHover();
-      }
-      
       function updateCurrTime() {
         nTime = new Date();
         nTime = nTime.getTime();
-        if (!tFlag) {
-          tFlag = true;
-          trackTime.addClass("active");
-        }
       }
       
       var rl1 = $("#album-name")
@@ -251,25 +212,32 @@ $(function () {
       
       function checkBuffering() {
         clearInterval(buffInterval);
-        let lastErrState = false;
         buffInterval = setInterval(function() {
-          if (nTime == 0 || bTime - nTime > 1000) {
+          var now = Date.now();
+          var fresh = nTime > 0 && (now - nTime) <= 2000;
+          if (!fresh) {
+            okTicks = 0;
             rl2.addClass("errbuff");
             rl2.removeClass("errbuffa");
-            var errs = true;
-            if (errs && !lastErrState) {
+            if (!isManuallyPaused && isPlaying) {
+              handlePlaybackError();
+            }
+            if (hasConnected && !errorSoundPlayed &&
+                now - lastErrorSoundAt > ERROR_SOUND_COOLDOWN) {
+              errorSoundPlayed = true;
+              lastErrorSoundAt = now;
               var sound = new Audio('./sounds/sfx7.mp3');
               sound.volume = buttonvol;
               sound.play();
-              if (!isManuallyPaused && isPlaying) {
-                handlePlaybackError();
-              }
             }
           } else {
             rl2.removeClass("errbuff");
             rl2.addClass("errbuffa");
-            bTime = new Date().getTime();
-            var errs = false;
+            okTicks++;
+            if (okTicks >= OK_TICKS_TO_REARM) {
+              hasConnected = true;
+              errorSoundPlayed = false;
+            }
             // Сброс счетчика попыток при успешном воспроизведении
             reconnectAttempts = 0;
             if (reconnectTimer) {
@@ -277,7 +245,7 @@ $(function () {
               reconnectTimer = null;
             }
           }
-          lastErrState = errs;
+          bTime = now;
         }, 5000);
       }
       
@@ -365,9 +333,6 @@ $(function () {
             i.filter(".fa-pause").attr("style", "");
             i.filter(".fa-play").attr("style", "display: none;");
           }
-          seekBar.width(0);
-          trackTime.removeClass("active");
-          
           nTime = 0;
           bTime = new Date();
           bTime = bTime.getTime();
@@ -377,8 +342,12 @@ $(function () {
             currImage = fm_list[currIndex+Number("1")];
             currentAudioUrl = fm_list[currIndex+Number("2")];
             audio.src = currentAudioUrl;
+            hasConnected = false;
+            errorSoundPlayed = false;
+            okTicks = 0;
             currTrack = fm_list[currIndex+Number("3")];
             currID = (currIndex/5)+1;
+            syncStationUrl(currID);
             
             console.log({RadioID:Number(currIndex/5+1), RadioName:currAlbum})
           }
@@ -470,11 +439,6 @@ $(function () {
         });
         
         playPauseButton.on("click", playPause);
-        sArea.mousemove(function (event) {
-          showHover(event);
-        });
-        sArea.mouseout(hideHover);
-        sArea.on("click", playFromClickedPos);
         $(audio).on("timeupdate", updateCurrTime);
         
         playPreviousTrackButton.on("click", function () {
@@ -601,9 +565,6 @@ function createtrack() {
 
 // Запуск создания частиц после загрузки страницы
 document.addEventListener('DOMContentLoaded', createtrack);
-document.addEventListener('DOMContentLoaded', function() {
-    createParticles();
-});
 
 // Дополнительная оптимизация для мобильных устройств
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {

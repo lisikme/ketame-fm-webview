@@ -1,156 +1,127 @@
-<!-- Форматирование -->
-<!DOCTYPE html>
-<html lang="ru" class="no-js">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <head>
-        <meta charset="utf-8">
-        <meta name="robots" content="noyaca" />
-        <meta name="yandex-verification" content="2d8c1dcb18ad48b7"/>
-        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
-        <meta property="og:title" content="KetaMeRadio Web">
-        <meta property="og:site_name" content="KetaRu">
-        <meta property="og:url" content="https://live.krcorp.ru">
-        <meta property="og:description" content="Наше онлайн версия радио бота">
-        <!-- <link rel="shortcut icon" href="https://i.imgur.com/yDm8NLA.png">
-        <meta property="og:image" content="https://i.imgur.com/yDm8NLA.png"> -->
-        <meta property="og:image:width" content="900">
-        <meta property="og:image:height" content="900">
-        <meta name="theme-color" content="#e43f79">
-        <link rel="stylesheet" href="./style.css">
-        <meta name="yandex-verification" content="bef8770f64b65879" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Слушать радиостанции онлайн">
-        <meta name="keywords" content="KetaRu, KetaruDev, KetaruDev, fist89, golive, radio, live, music, discord, bot, bots, krcorp.ru">
-        <script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
-        <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
-        <script>
-            function NewTab(url){
-                var options={
-                    height: 820, // устанавливает высоту окна в пикселях.
-                    width: 680, // устанавливает ширину окна в пикселях.
-                    toolbar: 0, // определяет, отображается ли панель инструментов (включая кнопки вперед и назад) {1 (ДА) или 0 (НЕТ)}.
-                    scrollbars: 0, // определяет, появятся ли полосы прокрутки в окне {1 (ДА) или 0 (НЕТ)}.
-                    status: 0, // отображается ли строка состояния внизу окна {1 (ДА) или 0 (НЕТ)}.
-                    resizable: 0, // можно ли изменить размер окна {1 (ДА) или 0 (НЕТ)}. Также может быть перегружен с помощью resizable.
-                    left: (screen.width-680)/2, // левое положение при появлении окна.
-                    top: (screen.height-890)/2, // верхнее положение при появлении окна.
-                    center: 1, // мы должны центрировать окно? {1 (ДА) или 0 (НЕТ)}. переопределяет верхний и левый
-                    createnew: 0, // должны ли мы создавать новое окно для каждого события {1 (ДА) или 0 (НЕТ)}.
-                    location: 0, // определяет, отображается ли адресная строка {1 (ДА) или 0 (НЕТ)}.
-                    menubar: 0 // определяет, отображается ли строка меню {1 (ДА) или 0 (НЕТ)}.
-                };
-                var parameters="location="+options.location+",menubar="+options.menubar+",height="+options.height+",width="+options.width+",toolbar="+options.toolbar+",scrollbars="+options.scrollbars+",status="+options.status+",resizable="+options.resizable+",left="+options.left+",screenX="+options.left+",top="+options.top+",screenY="+options.top;
-                var target = arguments[0] 
-                window.open(target, 'popup', parameters)
-            }
-        </script>
-    </head>
-<!-- Шапка страницы -->
-<div class="body-wrap">
-    <body>
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#000000">
+    <title>KetaMeRadio — Web</title>
+    <meta name="description" content="Слушать радиостанции онлайн">
+    <meta name="keywords" content="KetaRu, KetaruDev, fist89, radio, live, music, discord, bot, krcorp.ru">
+    <meta name="robots" content="noyaca">
+    <meta name="yandex-verification" content="2d8c1dcb18ad48b7">
+    <meta name="yandex-verification" content="bef8770f64b65879">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="KetaMeRadio Web">
+    <meta property="og:site_name" content="KetaRu">
+    <meta property="og:url" content="https://live.krcorp.ru">
+    <meta property="og:description" content="Наша онлайн версия радио бота">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Unbounded:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="./ui-v2.css">
+</head>
+<body>
+    <div class="body-wrap">
         <div class="animated-bg">
             <div class="gradient-orbs orb-1"></div>
             <div class="gradient-orbs orb-2"></div>
         </div>
         <div class="floating-particles" id="floatingParticles"></div>
         <div id="app-cover">
-            <style>
-                /* html, body{
-                    background: #18181a;
-                } */
-                #bg-artwork{
-                    display: none;
-                }
-            </style>
             <div id="bg-artwork"></div>
             <div id="player">
-                <div id="player-track">
-                    <div id="s-area"></div>
-                </div>
                 <div id="player-content">
                     <div class="grid-container">
-                        <div class="g-info">
-                            <div id="info-app">
-                                <span id="guilds">0</span>
-                                <span id="space">.</span>
-                                <span id="radiolist">0</span>
-                            </div>
-                            <script src="https://krcorpserver.github.io/db-ketaru/serv.js"></script>
-                            <script src="https://live.krcorp.ru/list.js"></script>
-                            <script>
-                                var global_list = fm_list.length/5
-                                document.getElementById('guilds').innerText = bot_guilds
-                                document.getElementById('radiolist').innerText = global_list
-                            </script>
-                        </div>
                         <div class="g-display">
                             <div id="box-play">
                                 <div id="player-info-box">
-                                    <div id="album-art-bg" style="background-image: url(./); background-size: cover;"></div>
-                                    <div id="album-art" style="background-image: url(./); background-size: cover;" class="active"></div>
+                                    <div id="album-art-bg"></div>
+                                    <div id="album-art"></div>
                                     <div id="player-info-live">
-                                        <div id="album-name" class="buffa">Загрузка</div>
+                                        <div id="album-name">Загрузка</div>
                                         <div id="track-name">---</div>
                                     </div>
                                 </div>
-                                <span id="idfm" class="number active">---</span>
+                                <div class="badges">
+                                    <div class="badge ping" id="ping" data-state="idle" title="Время отклика сервера станции (TTFB)">
+                                        <span class="badge__label">ping</span>
+                                        <span class="badge__value" id="ping-value">—</span>
+                                    </div>
+                                    <div class="badge">
+                                        <span class="badge__label">id</span>
+                                        <span class="badge__value number" id="idfm">---</span>
+                                    </div>
+                                </div>
                                 <div id="err">Недоступно</div>
                             </div>
                         </div>
                         <div class="g-player">
-                            <button class="button" id="play-previous" sound="true">
-                                <svg class="fas fa-backward" viewBox="0 0 512 512">
+                            <button class="button" id="play-previous" type="button" sound="true" aria-label="Предыдущая станция">
+                                <svg class="fas fa-backward" viewBox="0 0 512 512" aria-hidden="true">
                                     <path d="M11.5 280.6l192 160c20.6 17.2 52.5 2.8 52.5-24.6V96c0-27.4-31.9-41.8-52.5-24.6l-192 160c-15.3 12.8-15.3 36.4 0 49.2zm256 0l192 160c20.6 17.2 52.5 2.8 52.5-24.6V96c0-27.4-31.9-41.8-52.5-24.6l-192 160c-15.3 12.8-15.3 36.4 0 49.2z"></path>
                                 </svg>
                             </button>
-                            <button class="button" id="play-pause-button" sound="true">
-                                <svg class="fas fa-play" viewBox="0 0 448 512">
+                            <button class="button" id="play-pause-button" type="button" sound="true" aria-label="Включить эфир">
+                                <svg class="fas fa-play" viewBox="0 0 448 512" aria-hidden="true">
                                     <path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
                                 </svg>
-                                <svg class="fas fa-pause" viewBox="0 0 448 512" style="display: none;">
+                                <svg class="fas fa-pause" viewBox="0 0 448 512" style="display: none;" aria-hidden="true">
                                     <path d="M144 479H48c-26.5 0-48-21.5-48-48V79c0-26.5 21.5-48 48-48h96c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zm304-48V79c0-26.5-21.5-48-48-48h-96c-26.5 0-48 21.5-48 48v352c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48z"></path>
                                 </svg>
                             </button>
-                            <button class="button" id="play-next" sound="true">
-                                <svg class="fas fa-forward" viewBox="0 0 512 512">
+                            <button class="button" id="play-next" type="button" sound="true" aria-label="Следующая станция">
+                                <svg class="fas fa-forward" viewBox="0 0 512 512" aria-hidden="true">
                                     <path d="M500.5 231.4l-192-160C287.9 54.3 256 68.6 256 96v320c0 27.4 31.9 41.8 52.5 24.6l192-160c15.3-12.8 15.3-36.4 0-49.2zm-256 0l-192-160C31.9 54.3 0 68.6 0 96v320c0 27.4 31.9 41.8 52.5 24.6l192-160c15.3-12.8 15.3-36.4 0-49.2z"></path>
                                 </svg>
                             </button>
                         </div>
                         <div class="g-invite">
-                            <button class="buttonlink" id="add-bot" onclick="NewTab('https://discord.com/oauth2/authorize?client_id=1392384290066796707')">KetaMeRadio</button>
+                            <div class="conn" id="conn" data-state="idle">
+                                <span class="conn__text">
+                                    <span class="conn__label" id="conn-label" role="status" aria-live="polite">Ожидание</span>
+                                    <span class="conn__code" id="conn-code"></span>
+                                </span>
+                            </div>
                         </div>
                         <div class="g-volume">
                             <div class="range-input">
-                                <input type="range" id="range" min="0" max="100" value="0" step="1">
-                                <div class="value"><div>---</div></div>
-                        </div>
+                                <input type="range" id="range" min="0" max="100" value="0" step="1" aria-label="Громкость">
+                                <div class="value"><div>0</div></div>
+                            </div>
                         </div>
                         <div class="g-apps">
-                            <button id="nonebutton" class="buttonlink"></button>
-                            <!-- <button onclick="window.open('https://live.krcorp.ru/downloads', '_blank')" class="buttonlink" id="downloads">Скачать приложение</button> -->
+                            <div class="placeholder" aria-hidden="true"></div>
                         </div>
                         <div class="g-menu">
-                            <button class="btn2 bt" id="btn">Выбрать радиостанцию из списка</button>
+                            <button class="btn2 bt" id="btn" type="button">Выбрать радиостанцию из списка</button>
                             <div class="selectmenu" id="selectmenu">
                                 <div class="real-box">
-                                    <div id="album-art2" style="background-image: url(&quot;./img/fm_rts.png&quot;); background-size: cover;" class="active"></div>
+                                    <div id="album-art2"></div>
                                     <div id="album-name2">Загрузка</div>
+                                    <div class="real-box__count">
+                                        <span class="real-box__label">Всего</span>
+                                        <span class="real-box__value" id="station-total">0</span>
+                                    </div>
                                 </div>
                                 <div class="dropdown" id="dropdown"></div>
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="grid-container" id="grid-ads">
-                        <a href="https://kensolua.ru" target="_blank" rel="noopener noreferrer" id="ads">
-                            <img src="kenso.png" alt="" id="img-ads">
-                        </a>
-                    </div> -->
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://krcorpserver.github.io/db-ketaru/serv.js"></script>
+    <script src="https://live.krcorp.ru/list.js"></script>
+    <script src="./config.js"></script>
+    <script src="./ver5.js"></script>
+    <script src="./ui-v2.js"></script>
+</body>
 </html>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-<script src="./config.js"></script>
-<script src="./ver5.js"></script>
+
+
+

@@ -208,7 +208,7 @@
         }
 
         #q {
-            height: calc(100% - 58px);
+            height: calc(100% - 46px);
         }
 
         html, body {
@@ -236,16 +236,32 @@
 <body id="site-bg">
     <!-- Header Section -->
     <header id="site-header">
-        <type id="page-name">
-            <span id="namm">KetaMeFM<span id="rel">BETA</span></span>
+        <div id="site-header-box">
+            <a id="site-logo-link" href="https://krcorp.ru" target="_blank" rel="noopener noreferrer">
+                <div id="site-logo-box2">
+                    <img id="site-logo-img" src="https://krcorp.ru/corp.png" alt="KR Corp">
+                    <name id="site-logo-name2">
+                        <div id="tesx2">
+                            <span id="ketaru2">KR</span>
+                            <span id="corp2">Corp</span>
+                        </div>
+                    </name>
+                </div>
+            </a>
+            <type id="page-name">
+            <span id="namm">KetaMeFM</span>
             <style>
+                #nam {
+                    --type-color: #a1a1a1;
+                }
+
                 #logo-text {
-                    color: #fff;
+                    color: var(--type-color);
                 }
                 
                 #logo-text::after {
                     content: "|";
-                    color: rgb(255, 255, 255);
+                    color: var(--type-color);
                     animation: blink .8s infinite;
                 }
                 @keyframes blink {
@@ -254,7 +270,7 @@
                 }
                 
                 .colored {
-                    color: var(--color);
+                    color: var(--color, var(--type-color));
                 }
                 #logo-text, .colored{
                     font-family: Unbounded, sans-serif !important;
@@ -266,10 +282,10 @@
             </style>
             <script>
                 const phrases = [
-                    '{#000000::⚡}{#9e9e9e::Приложение}', 
-                    '{#000000::✨}{#99FF99::Бесплатно!}', 
-                    '{#000000::⚙️}{#FF6666::Работает 24/7}', 
-                    '{#000000::🏆}{#ffdb5c::Мы #1...}',
+                    'Приложение',
+                    'Бесплатно!',
+                    'Работает 24/7',
+                    'Мы #1...',
                 ];
                 let current = 0;
                 let isDeleting = false;
@@ -341,25 +357,7 @@
                 setTimeout(type, 1000);
             </script>
         </type>
-        <div id="site-header-box">
-            <a>
-                <!-- <div id="site-logo-box">
-                    <img id="site-logo-img" src="https://krcorp.ru/corp.png">
-                    <name id="site-logo-name">
-                        <span id="ketaru">Ketaru</span>
-                        <span id="corp">Corp</span>
-                    </name>
-                </div> -->
-                <div id="site-logo-box2">
-                    <img id="site-logo-img" src="https://krcorp.ru/corp.png">
-                    <name id="site-logo-name2">
-                        <div id="tesx2">
-                            <span id="ketaru2">KR</span>
-                            <span id="corp2">Corp</span>
-                        </div>
-                    </name>
-                </div>
-            </a>
+            <span id="rel">BETA</span>
         </div>
     </header>
 
