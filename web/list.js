@@ -314,13 +314,13 @@ fm_list=[
 
     "Макс FM",
     "img/fm_mf.png",
-    "https://pub0302.101.ru:8000/stream/air/aac/64/202?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJrZXkiOiI5MDFhNTgyOGM2MzQzOWY3NDk1YTI4YzEyOTQ1ODQxOCIsIklQIjoiMjMuMTA1LjI1My4xOTciLCJVQSI6Im5vZGUtZmV0Y2gvMS4wICgraHR0cHM6Ly9naXRodWIuY29tL2JpdGlubi9ub2RlLWZldGNoKSIsIlJlZiI6IiIsInVpZF9jaGFubmVsIjoiMjAyIiwidHlwZV9jaGFubmVsIjoiY2hhbm5lbCIsInR5cGVEZXZpY2UiOiJQQyIsIkJyb3dzZXIiOiIiLCJCcm93c2VyVmVyc2lvbiI6IiIsIlN5c3RlbSI6IlVua25vd24iLCJleHAiOjE2OTk1NzAwNTR9.12PWouwSTqDUANe7L4EO7apR8ZKtdFVQlb7IfeYPoVA",
+    "https://strm.yandex.ru/live/1/vh-muz-converted/vplspy4qid2fzeowkny3/ysign1=0cf2c487a65359a6081e993047278da57238e66cc95d0fc26eee8dc6a98e8f1d,abcID=94,bstrat=strm,chID=vplcfwoexccy6ypesl33,dvr=300,episode=vplebf32tacho23lkx3z,line=vpll7ntqkfbh74wq34kn,pfx,sfx,start=1793866080,ts=6af344dd/index-a4.m3u8",
     "Онлайн",
     "https://cdn.discordapp.com/emojis/1232760178697437296.webp?size=96&quality=lossless",
 
     "Авторадио",
     "img/fm_ar.png",
-    "https://pub0101.101.ru/stream/air/aac/64/100?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJrZXkiOiIwN2FjZmRlNTUxMzA5MGM4Yzk4MGFmNTI4YjQ4YmJmYyIsIklQIjoiMjMuMTA1LjI1My4xOTciLCJVQSI6Im5vZGUtZmV0Y2gvMS4wICgraHR0cHM6Ly9naXRodWIuY29tL2JpdGlubi9ub2RlLWZldGNoKSIsIlJlZiI6IiIsInVpZF9jaGFubmVsIjoiMTAwIiwidHlwZV9jaGFubmVsIjoiY2hhbm5lbCIsInR5cGVEZXZpY2UiOiJQQyIsIkJyb3dzZXIiOiIiLCJCcm93c2VyVmVyc2lvbiI6IiIsIlN5c3RlbSI6IlVua25vd24iLCJleHAiOjE2OTk1NzA5NDR9.U0FYDnZLuaHJk7wAudUqMKtRLj5o-ZB5tJ92cG0GCAI",
+    "https://hls-01-gpm.hostingradio.ru/avtoradio495/64/playlist.m3u8",
     "Онлайн",
     "https://cdn.discordapp.com/emojis/1232760167846776892.webp?size=96&quality=lossless",
 
