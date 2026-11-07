@@ -11,6 +11,15 @@
     var selectMenu = document.getElementById("selectmenu");
     var dropdown = document.getElementById("dropdown");
 
+    function sourceUrl(a) {
+        if (!a) return "";
+        if (window.KetaStream && typeof window.KetaStream.currentUrl === "function") {
+            var original = window.KetaStream.currentUrl(a);
+            if (original) return original;
+        }
+        return a.src || "";
+    }
+
     function restartClass(el, className) {
         if (!el || reduceMotion) return;
         el.classList.remove(className);
@@ -163,10 +172,13 @@
 
         requestStatus(url, "HEAD", null, controller)
             .then(function (status) {
-                if (status === 405 || status === 501) {
-                    return requestStatus(url, "GET", { Range: "bytes=0-0" }, controller);
+                if (status >= 200 && status < 300) {
+                    return status;
                 }
-                return status;
+                return requestStatus(url, "GET", { Range: "bytes=0-0" }, controller)
+                    .then(function (getStatus) {
+                        return getStatus >= 200 && getStatus < 300 ? getStatus : status;
+                    });
             })
             .then(finish)
             .catch(function () { finish(null); });
@@ -192,11 +204,12 @@
             return;
         }
         if (a.error) {
-            var probed = probeCache.url === a.src && probeCache.status >= 400 ? probeCache.status : null;
+            var url = sourceUrl(a);
+            var probed = probeCache.url === url && probeCache.status >= 400 ? probeCache.status : null;
             setConn("offline", probed ? "Error: " + probed : errorText(a.error.code));
             if (!errorProbed) {
                 errorProbed = true;
-                probeHttpStatus(a.src, function (status) {
+                probeHttpStatus(url, function (status) {
                     if (!conn || connState !== "offline" || !status || status < 400) return;
                     setConn("offline", "Error: " + status);
                 });
@@ -343,8 +356,18 @@
             credentials: "omit",
             signal: controller.signal
         }).then(function (res) {
-            if (!res.ok) { finish(null); return; }
-            finish(now() - started);
+            if (res.ok) { finish(now() - started); return; }
+            started = now();
+            return fetch(url, {
+                method: "GET",
+                headers: { Range: "bytes=0-0" },
+                mode: "cors",
+                cache: "no-store",
+                credentials: "omit",
+                signal: controller.signal
+            }).then(function (getRes) {
+                finish(getRes.ok ? now() - started : null);
+            });
         }).catch(function () {
             finish(null);
         });
@@ -354,7 +377,7 @@
         if (!pingEl) return;
         if (document.hidden) return;
         var a = window.audio;
-        var url = a && a.src ? a.src : "";
+        var url = sourceUrl(a);
         if (!url) {
             if (pingTarget) {
                 pingTarget = "";

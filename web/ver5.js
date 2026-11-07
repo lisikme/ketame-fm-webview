@@ -141,6 +141,9 @@ $(function () {
       let lastErrorSoundAt = 0;
       const OK_TICKS_TO_REARM = 2;
       const ERROR_SOUND_COOLDOWN = 15000;
+      let streamArtist = '';
+      let streamTitle = '';
+      let streamCover = '';
       
       function playPause() {
         setTimeout(function () {
@@ -153,16 +156,17 @@ $(function () {
             if (pausedByUser) {
               pausedByUser = false;
               // Возврат с паузы: переподключаемся к живому краю эфира
-              audio.load();
+              KetaStream.restart(audio);
             }
             checkBuffering();
             i.filter(".fa-pause").attr("style", "");
             i.filter(".fa-play").attr("style", "display: none;");
             audio.play().catch(error => {
+              if (error && error.name === 'AbortError') return;
               console.log("Playback failed:", error);
               handlePlaybackError();
             });
-            updateMediaSession('play');
+            updateMediaSession('playing');
           } else {
             isManuallyPaused = true;
             pausedByUser = true;
@@ -174,7 +178,7 @@ $(function () {
             i.filter(".fa-pause").attr("style", "display: none;");
             i.filter(".fa-play").attr("style", "");
             audio.pause();
-            updateMediaSession('pause');
+            updateMediaSession('paused');
           }
         }, 300);
       }
@@ -201,7 +205,7 @@ $(function () {
         reconnectTimer = setTimeout(function() {
           if (!isManuallyPaused && isPlaying) {
             console.log("Attempting to reconnect...");
-            audio.load();
+            KetaStream.restart(audio);
             audio.play().catch(error => {
               console.log("Reconnect failed, retrying in 5 seconds");
               startReconnect();
@@ -252,18 +256,24 @@ $(function () {
       function updateMediaSession(state) {
         if ('mediaSession' in navigator) {
           try {
+            let artwork = streamCover
+              ? [
+                  {src: streamCover, sizes: '512x512', type: 'image/jpeg'},
+                  {src: streamCover, sizes: '256x256', type: 'image/jpeg'}
+                ]
+              : [
+                  {src: './' + currImage, sizes: '96x96', type: 'image/png'},
+                  {src: './' + currImage, sizes: '128x128', type: 'image/png'},
+                  {src: './' + currImage, sizes: '192x192', type: 'image/png'},
+                  {src: './' + currImage, sizes: '256x256', type: 'image/png'},
+                  {src: './' + currImage, sizes: '384x384', type: 'image/png'},
+                  {src: './' + currImage, sizes: '512x512', type: 'image/png'}
+                ];
             navigator.mediaSession.metadata = new MediaMetadata({
-              title: currAlbum || 'Radio Station',
-              artist: currTrack || 'Live Stream',
+              title: streamTitle || currAlbum || 'Radio Station',
+              artist: streamArtist || currTrack || 'Live Stream',
               album: 'KetaMeRadio',
-              artwork: [
-                {src: './' + currImage, sizes: '96x96', type: 'image/png'},
-                {src: './' + currImage, sizes: '128x128', type: 'image/png'},
-                {src: './' + currImage, sizes: '192x192', type: 'image/png'},
-                {src: './' + currImage, sizes: '256x256', type: 'image/png'},
-                {src: './' + currImage, sizes: '384x384', type: 'image/png'},
-                {src: './' + currImage, sizes: '512x512', type: 'image/png'}
-              ]
+              artwork: artwork
             });
             
             navigator.mediaSession.playbackState = state;
@@ -341,7 +351,10 @@ $(function () {
             currAlbum = fm_list[currIndex+Number("0")];
             currImage = fm_list[currIndex+Number("1")];
             currentAudioUrl = fm_list[currIndex+Number("2")];
-            audio.src = currentAudioUrl;
+            KetaStream.setSource(audio, currentAudioUrl);
+            streamArtist = '';
+            streamTitle = '';
+            streamCover = '';
             hasConnected = false;
             errorSoundPlayed = false;
             okTicks = 0;
@@ -356,6 +369,7 @@ $(function () {
             if (Number(currIndex/5+1) === parseInt(currIndex/5+1)) {
               isPlaying = true;
               audio.play().catch(error => {
+                if (error && error.name === 'AbortError') return;
                 console.log("Playback failed:", error);
                 handlePlaybackError();
               });
@@ -407,6 +421,21 @@ $(function () {
         // Не загружаем поток сразу, только после действия пользователя
         audio.preload = 'none';
         selectTrack(0);
+
+        // Исполнитель и трек из HLS-плейлиста (EXT-X-DATERANGE)
+        KetaStream.on('metadata', function (info) {
+          if (!info || !audio) return;
+          if (info.url !== KetaStream.currentUrl(audio)) return;
+          streamArtist = info.artist || '';
+          streamTitle = info.title || '';
+          streamCover = info.cover || '';
+          let line = streamTitle && streamArtist
+            ? streamArtist + ' — ' + streamTitle
+            : (streamTitle || streamArtist);
+          if (!line) return;
+          trackName.text(line);
+          if (!audio.paused) updateMediaSession('playing');
+        });
         
         // Обработка ошибок сети
         audio.addEventListener('error', function(e) {

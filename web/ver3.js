@@ -235,7 +235,7 @@ var playerTrack=$("#player-track"),
       if (Number(currIndex/5+1) === parseInt(currIndex/5+1)) {
         currAlbum = fm_list[currIndex+Number("0")]; // Radio Name
         currImage = fm_list[currIndex+Number("1")]; // Radio Image
-        audio.src = fm_list[currIndex+Number("2")]; // Radio Server
+        KetaStream.setSource(audio, fm_list[currIndex+Number("2")]); // Radio Server
         currTrack = fm_list[currIndex+Number("3")]; // Radio Status
         currID = (currIndex/5)+1;                   // Radio ID
         console.log({RadioID:Number(currIndex/5+1), RadioName:currAlbum})
@@ -305,6 +305,15 @@ var playerTrack=$("#player-track"),
         }};
       });
     }
+
+    if (typeof KetaStream !== 'undefined' && KetaStream.on) {
+      KetaStream.on('metadata', function (info) {
+        if (!info || !audio || info.url !== KetaStream.currentUrl(audio)) return;
+        var line = info.artist && info.title ? info.artist + ' — ' + info.title : (info.title || info.artist);
+        if (line) trackName.text(line);
+      });
+    }
+
     initPlayer();
   });
 // ---------------------------------------------------------------------------------------
