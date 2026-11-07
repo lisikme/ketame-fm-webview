@@ -29,13 +29,13 @@ fm_list=[
 
     "Remix FM",
     "img/fm_remix.png",
-    "https://rmx.amgradio.ru/RemixFM",
+    "https://strm.yandex.ru/live/2/vh-muz-converted/vplsnjiavsqd5mmw2lyw/ysign1=70faacadd171e0d88b846e5cb9dc7ee0540a45420ab561cd9699aaa41d8db469,abcID=94,bstrat=strm,chID=vplcfwoexccy6ypesl33,dvr=300,episode=vpleml32qjextl27kbuq,line=vpllxs5acdpegkbvscng,pfx,sfx,start=1793796080,ts=6af1d722/index-a4.m3u8",
     "Онлайн",
     "https://cdn.discordapp.com/emojis/1232726146056192122.webp?size=96&quality=lossless",
 
     "DFM",
     "img/fm_dfm.png",
-    "https://dfm.hostingradio.ru/dfm96.aacp?st=be86f20b-2211-56ac-ac97-648f95b28025&gts=1710570240",
+    "https://hls-01-dfm.hostingradio.ru/dfm/96/playlist.m3u8",
     "Онлайн",
     "https://cdn.discordapp.com/emojis/1232725729276461056.webp?size=96&quality=lossless",
 
@@ -47,7 +47,7 @@ fm_list=[
 
     "Хайп FM",
     "img/fm_hype.png",
-    "https://hfm.amgradio.ru/HypeFM",
+    "https://strm.yandex.ru/live/2/vh-muz-converted/vplsvgtr3tiw5vnismls/ysign1=3b48fccf003bb1a370ff118ec5e2b565d6c063cd64d34c55113d0f8380b603a0,abcID=94,bstrat=strm,chID=vplcfwoexccy6ypesl33,dvr=300,episode=vple4qfcelwccfxyofi7,line=vpllvcvciugek7xfiq2i,pfx,sfx,start=1793930310,ts=6af32490/index-a4.m3u8",
     "Онлайн",
     "https://cdn.discordapp.com/emojis/1232725710645493892.webp?size=96&quality=lossless",
 
